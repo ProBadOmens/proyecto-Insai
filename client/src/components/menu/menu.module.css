@@ -1,0 +1,339 @@
+
+.container {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    background-color: var(--lithg-green);
+    height: 100vh;
+    width: 260px;
+    overflow-x: hidden;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+.iconmundo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: trasnform 0.5s ease-in-out, box-shadow 0.3s ease-in-out;
+    animation: spin 10s linear infinite;
+}
+.iconmundo:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 0px 15px 15px #5dcc66d5;
+    border-radius: 50%;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+.navList {
+    position: relative;
+    left: -8px;
+    list-style: none;
+    padding: 2px 6px;
+    margin-top: 30px;
+    margin-right: 9px;
+    margin-left: 8px;
+    width: 120%;
+    border: 1px solid var(--white);    
+    border-radius: 20px;
+    background-color: #34343431;
+    transition: all 0.3s ease-in-out;
+}
+
+.navItem {
+    position: relative;
+    left: 0;
+    margin-right: 20px;
+    padding: 2px 2px;
+    margin: auto;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+}
+.navItem:hover{
+    background-color: #05050550;
+    border-radius: 30px;
+    border-bottom: 1px solid var(--vino-red);
+}
+.navItem span:hover {
+    color: var(--white);
+}
+
+.navItem.active {
+    background-color: #05050550; 
+    border-radius: 20px;
+    border-bottom: 1px solid var(--vino-red);
+}
+/* estilos para las letras dentro del navItem*/
+.navItem span,
+.navItem .navLink {
+    color: #050505;
+    transition: color 0.3s ease-in-out;
+}
+
+.navItem:hover span,
+.navItem:hover .navLink {
+    color: var(--white); /* cambia el color al pasar el raton */
+}
+
+.navItem.active span,
+.navItem.active .navLink {
+    color: var(--white); /* Mantén el color de las letras */
+}
+
+.navLink {
+    text-decoration: none;
+    color: #050505;
+    font-size: 14px;
+    display: inline-block;
+    padding: 5px 0;
+    transition: color 0.3s ease-in-out;
+}
+
+/* segunda lista menu cerrada*/
+.subContainer{
+    max-height: 0; 
+    opacity: 0;
+    overflow: hidden;
+    list-style-position: outside;
+    list-style-image: url('../../../public/play.svg');
+    vertical-align: middle;
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* Sublista abierta */
+.subContainerOpen {
+    max-height: 500px; 
+    opacity: 1;
+    overflow: visible;
+    border-radius: 25px;
+    border: 1px transparent;
+}
+
+.subList {
+    text-decoration: none;
+    width: 70%;
+    margin-top: 5px;
+    color: #000000;
+    border-radius: 2px 20px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+.subList:hover {
+    background-color: #8f3636; 
+}
+
+.subList.active {
+    background-color: #8f3636; 
+    color: #ffffff; 
+}
+/* iconos de los links */
+.icon {
+    position: fixed;
+    vertical-align: middle;
+    left: 20px;
+    width: 40px; 
+    height: 20px;
+    flex-shrink: 0;
+    flex-shrink: 0;
+}
+/* Estilo base para el ícono de flecha */
+.iconFlecha {
+    position: fixed;
+    vertical-align: middle;
+    width: 50px;
+    height: 20px;
+    transition: transform 0.5s ease-in-out; 
+}
+
+/* Rotación hacia abajo cuando la sublista está abierta */
+.iconRotated {
+    transform: rotate(90deg); /* Gira la flecha 90 grados */
+}
+/* Logo menu */
+
+/* Media Query para Pantallas de Hasta 768px (Tabletas y Móviles) */
+@media (max-width: 768px) {
+    .container {
+        left: 0; /* Asegura que el menú esté siempre visible */
+        width: 75%; /* Ajusta el ancho del menú para móviles */
+        height: 100vh; /* Mantén la altura completa de la pantalla */
+        overflow-y: auto; /* Agrega desplazamiento vertical si es necesario */
+        background-color: var(--lithg-green); /* Mantén el color existente */
+    }
+
+    .Logo {
+        display: none; /* Oculta la imagen (Logo) en dispositivos móviles */
+    }
+
+    .navList {
+        margin-top: 20px; /* Reduce el espacio superior */
+        width: 100%; /* Ajusta al nuevo tamaño del menú */
+    }
+
+    .navItem {
+        padding: 10px 0; /* Ajusta el espaciado entre elementos */
+        font-size: 14px; /* Reduce el tamaño del texto */
+    }
+
+    .navLink {
+        font-size: 16px; /* Asegura un tamaño adecuado para los enlaces */
+    }
+
+    .icon {
+        width: 25px; /* Ajusta el tamaño de los íconos */
+        height: 25px;
+    }
+
+    .iconFlecha {
+        width: 20px;
+        height: 20px;
+    }
+
+    .subContainer {
+        max-height: 0; /* Mantén la configuración inicial para sublistas cerradas */
+        opacity: 0;
+        transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    }
+
+    .subContainerOpen {
+        max-height: 300px; /* Ajusta según el contenido de las sublistas */
+        opacity: 1;
+    }
+}
+
+/* Media Query para Dispositivos Muy Pequeños (480px o menos) */
+@media (max-width: 480px) {
+    .container {
+        width: 100%; /* Ocupa todo el ancho del dispositivo */
+    }
+
+    .navItem {
+        font-size: 12px; /* Reduce aún más el tamaño del texto */
+        padding: 8px 0;
+    }
+
+    .navLink {
+        font-size: 14px; /* Ajusta el tamaño de los enlaces */
+    }
+
+    .icon {
+        width: 20px; /* Ajusta el tamaño de los íconos */
+        height: 20px;
+    }
+}
+
+/* Media Query para Pantallas de Hasta 768px (Tabletas y Móviles) */
+@media (max-width: 768px) {
+    .container {
+        left: 0; /* Mantiene el menú visible */
+        width: 24%; /* Ajusta el ancho del menú ligeramente más amplio para móviles */
+        height: 100vh; /* Ocupa toda la pantalla */
+        overflow-y: auto; /* Permite desplazamiento vertical si es necesario */
+        background-color: var(--lithg-green); /* Conserva el color principal */
+        padding: 10px; /* Reduce el padding para mejor ajuste en pantallas pequeñas */
+        box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2); /* Acentúa el efecto del menú */
+    }
+
+    .Logo {
+        display: none; /* Oculta el logo en móviles */
+    }
+
+    .navList {
+        margin-top: 0; /* Reduce el margen superior */
+        padding: 0 10px; /* Agrega espacio interno horizontal */
+        width: 100%; /* Se ajusta al nuevo ancho del contenedor */
+    }
+
+    .navItem {
+        padding: 12px 5px; /* Mejora el espaciado entre elementos */
+        font-size: 10px; /* Asegura la legibilidad del texto */
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .navItem:hover {
+        background-color: #3a3a3a; /* Cambia el color al pasar el ratón */
+        border-radius: 8px; /* Mejora el diseño */
+    }
+
+    .navLink {
+        font-size: 12px; /* Ajusta el tamaño de los textos para mejor proporción */
+    }
+
+    .icon {
+        width: 15px; /* Ajusta proporcionalmente los íconos */
+        height: 20px;
+    }
+
+    .iconFlecha {
+        width: 15px;
+        height: 15px;
+        transition: transform 0.3s ease-in-out; /* Mantenemos la transición */
+    }
+
+    .subContainer {
+        max-height: 0; /* Sublistas cerradas inicialmente */
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    }
+
+    .subContainerOpen {
+        max-height: 350px; /* Ajusta ligeramente para un rango mayor */
+        opacity: 1;
+        transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    }
+
+    .subList {
+        margin: 10px 5px; /* Mejora el espaciado entre elementos de sublistas */
+        font-size: 12px; /* Reduce ligeramente el tamaño de texto */
+    }
+
+    .subList:hover {
+        background-color: #505050; /* Mejora la visibilidad al pasar el ratón */
+        color: #fff; /* Cambia el color del texto al hover */
+    }
+}
+
+/* Media Query para Dispositivos Muy Pequeños (480px o menos) */
+@media (max-width: 480px) {
+    .container {
+        width: 51%; /* El menú ocupa todo el ancho */
+        padding: 0 5px; /* Reduce el padding para maximizar el espacio visible */
+    }
+
+    .navItem {
+        font-size: 12px; /* Ajusta aún más el tamaño del texto */
+        padding: 10px 0; /* Mantiene una separación limpia entre elementos */
+    }
+
+    .navLink {
+        font-size: 15px; /* Ajusta ligeramente para pantallas más pequeñas */
+    }
+
+    .icon {
+        width: 20px; /* Reduce el tamaño de los íconos */
+        height: 20px;
+    }
+
+    .subList {
+        font-size: 15px; /* Reduce el tamaño de las sublistas */
+        padding: 15px; /* Mejora la interacción táctil en pantallas pequeñas */
+    }
+}
