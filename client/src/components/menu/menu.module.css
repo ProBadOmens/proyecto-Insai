@@ -1,339 +1,182 @@
-
 .container {
-    position: fixed;
-    top: 0px;
-    left: 0;
+    display: flex;
+    overflow: hidden; /* Evita que el contenido desborde */
+}
+
+.sidebar {
+    position: fixed; /* Fija el menú en su posición */
+    top: 0; /* Alinea el menú con la parte superior de la ventana */
+    left: 0; /* Alinea el menú con el lado izquierdo de la ventana */
+    background-color: var(--grey2); /* Fondo del menú */
+    color: var(--black); /* Color del texto */
+    width: 250px; /* Ancho del menú expandido */
+    height: 100vh; /* Asegura que el menú ocupe toda la altura de la ventana */
+    transition: width 0.3s ease-in-out; /* Transición suave al colapsar/expandir */
+    overflow: hidden; /* Oculta el contenido que exceda el ancho */
+    z-index: 1; /* Asegura que el menú esté por encima del contenido principal */
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 15px;
-    background-color: var(--lithg-green);
-    height: 100vh;
-    width: 260px;
-    overflow-x: hidden;
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
-    z-index: 100;
-}
-.iconmundo{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    margin: 0 auto;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: trasnform 0.5s ease-in-out, box-shadow 0.3s ease-in-out;
-    animation: spin 10s linear infinite;
-}
-.iconmundo:hover{
-    transform: scale(1.1);
-    box-shadow: 0px 0px 15px 15px #5dcc66d5;
-    border-radius: 50%;
+    justify-content: space-between; /* Esto coloca el footer al final */
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+.container.collapsed .sidebar {
+    width: 60px; /* Ancho del menú colapsado */
 }
-
-
 
 .navList {
     position: relative;
-    left: -8px;
+    top: 60px;
     list-style: none;
-    padding: 2px 6px;
-    margin-top: 30px;
-    margin-right: 9px;
-    margin-left: 8px;
-    width: 120%;
-    border: 1px solid var(--white);    
-    border-radius: 20px;
-    background-color: #34343431;
-    transition: all 0.3s ease-in-out;
+    padding: 0;
+    margin: 0;
 }
 
 .navItem {
-    position: relative;
-    left: 0;
-    margin-right: 20px;
-    padding: 2px 2px;
-    margin: auto;
-    border: 1px solid transparent;
-    transition: all 0.3s ease-in-out;
-}
-.navItem:hover{
-    background-color: #05050550;
-    border-radius: 30px;
-    border-bottom: 1px solid var(--vino-red);
-}
-.navItem span:hover {
-    color: var(--white);
+    display: flex;
+    flex-direction: column; /* Ajusta para sublistas */
+    align-items: flex-start; /* Alinea el contenido de forma adecuada */
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease-in-out;
 }
 
-.navItem.active {
-    background-color: #05050550; 
-    border-radius: 20px;
-    border-bottom: 1px solid var(--vino-red);
-}
-/* estilos para las letras dentro del navItem*/
-.navItem span,
-.navItem .navLink {
-    color: #050505;
-    transition: color 0.3s ease-in-out;
+.navItem:hover {
+    background-color: #6c6b6b7c;
+    color: #343434;
 }
 
-.navItem:hover span,
-.navItem:hover .navLink {
-    color: var(--white); /* cambia el color al pasar el raton */
-}
-
-.navItem.active span,
-.navItem.active .navLink {
-    color: var(--white); /* Mantén el color de las letras */
+.navItem.selected {
+    background-color: #5554548d; /* Color para el ítem seleccionado */
+    color: var(--white); /* Cambia el color del texto */
 }
 
 .navLink {
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    color: #050505;
-    font-size: 14px;
-    display: inline-block;
-    padding: 5px 0;
-    transition: color 0.3s ease-in-out;
+    color: inherit;
+    width: 100%;
 }
 
-/* segunda lista menu cerrada*/
-.subContainer{
-    max-height: 0; 
-    opacity: 0;
-    overflow: hidden;
-    list-style-position: outside;
-    list-style-image: url('../../../public/play.svg');
-    vertical-align: middle;
-    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
-}
-
-/* Sublista abierta */
-.subContainerOpen {
-    max-height: 500px; 
-    opacity: 1;
-    overflow: visible;
-    border-radius: 25px;
-    border: 1px transparent;
-}
-
-.subList {
-    text-decoration: none;
-    width: 70%;
-    margin-top: 5px;
-    color: #000000;
-    border-radius: 2px 20px;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-.subList:hover {
-    background-color: #8f3636; 
-}
-
-.subList.active {
-    background-color: #8f3636; 
-    color: #ffffff; 
-}
-/* iconos de los links */
 .icon {
-    position: fixed;
-    vertical-align: middle;
-    left: 20px;
-    width: 40px; 
-    height: 20px;
-    flex-shrink: 0;
-    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+    transition: margin 0.3s ease;
 }
-/* Estilo base para el ícono de flecha */
+
+.container.collapsed .icon {
+    margin-right: 0; /* Elimina el margen en el menú colapsado */
+}
+
+.navLabel {
+    white-space: nowrap;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.container.collapsed .navLabel {
+    opacity: 0; /* Oculta el texto en el menú colapsado */
+}
+
+.submenuContainer {
+    max-height: 0; /* Oculta el submenú inicialmente */
+    overflow: hidden; /* Oculta el contenido que exceda el contenedor */
+    opacity: 0; /* Submenú invisible por defecto */
+    width: 100%; /* Para mantener alineado con el contenedor principal */
+    transition: max-height 0.4s ease, opacity 0.4s ease; /* Transición suave para el despliegue */
+}
+
+.submenuOpen {
+    max-height: 500px; /* Altura máxima para mostrar el submenú */
+    opacity: 1; /* Hace visible el submenú */
+}
+
+.submenu {
+    list-style: none;
+    padding-left: 20px; /* Desplaza las sublistas a la derecha */
+    margin: 0;
+}
+
+.submenuItem {
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #444444;
+    border: 1px solid transparent;
+    display: block;
+    transition: color 0.3s ease, padding-left 0.3s ease, border-bottom 0.3s ease-in-out; /* Animación suave */
+}
+
+.submenuItem:hover {
+    color: #fff;
+    padding-left: 25px; /* Añade un efecto de desplazamiento al pasar el mouse */
+    border-bottom: 1px solid var(--vino-red);
+}
+
+.content {
+    flex: 1;
+    margin-left: 200px; /* Deja espacio para el menú expandido */
+    padding: 20px;
+    background-color: #ecf0f1;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.container.collapsed .content {
+    margin-left: 60px; /* Ajusta el margen cuando el menú está colapsado */
+}
+
+/* Estilos para el ícono de flecha */
 .iconFlecha {
-    position: fixed;
-    vertical-align: middle;
-    width: 50px;
-    height: 20px;
-    transition: transform 0.5s ease-in-out; 
+    width: 16px;
+    height: 16px;
+    margin-left: auto; /* Alinea la flecha al lado derecho */
+    transition: transform 0.4s ease; /* Transición suave para la rotación */
 }
 
-/* Rotación hacia abajo cuando la sublista está abierta */
 .iconRotated {
-    transform: rotate(90deg); /* Gira la flecha 90 grados */
+    transform: rotate(90deg); /* Rota la flecha 90 grados */
 }
-/* Logo menu */
-
-/* Media Query para Pantallas de Hasta 768px (Tabletas y Móviles) */
-@media (max-width: 768px) {
-    .container {
-        left: 0; /* Asegura que el menú esté siempre visible */
-        width: 75%; /* Ajusta el ancho del menú para móviles */
-        height: 100vh; /* Mantén la altura completa de la pantalla */
-        overflow-y: auto; /* Agrega desplazamiento vertical si es necesario */
-        background-color: var(--lithg-green); /* Mantén el color existente */
-    }
-
-    .Logo {
-        display: none; /* Oculta la imagen (Logo) en dispositivos móviles */
-    }
-
-    .navList {
-        margin-top: 20px; /* Reduce el espacio superior */
-        width: 100%; /* Ajusta al nuevo tamaño del menú */
-    }
-
-    .navItem {
-        padding: 10px 0; /* Ajusta el espaciado entre elementos */
-        font-size: 14px; /* Reduce el tamaño del texto */
-    }
-
-    .navLink {
-        font-size: 16px; /* Asegura un tamaño adecuado para los enlaces */
-    }
-
-    .icon {
-        width: 25px; /* Ajusta el tamaño de los íconos */
-        height: 25px;
-    }
-
-    .iconFlecha {
-        width: 20px;
-        height: 20px;
-    }
-
-    .subContainer {
-        max-height: 0; /* Mantén la configuración inicial para sublistas cerradas */
-        opacity: 0;
-        transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    }
-
-    .subContainerOpen {
-        max-height: 300px; /* Ajusta según el contenido de las sublistas */
-        opacity: 1;
-    }
+/* footer menu */
+.footer {
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid var(--vino-red);
+    background-color: #343434d2; /* Mantiene el color del menú */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transición suave para mostrar/ocultar */
+}
+.container.collapsed .footer {
+    opacity: 0; /* Oculta el footer cuando el menú está colapsado */
+    transform: translateY(20px); /* Desplaza el footer hacia abajo */
+    pointer-events: none; /* Evita que sea interactivo cuando está oculto */
 }
 
-/* Media Query para Dispositivos Muy Pequeños (480px o menos) */
-@media (max-width: 480px) {
-    .container {
-        width: 100%; /* Ocupa todo el ancho del dispositivo */
-    }
 
-    .navItem {
-        font-size: 12px; /* Reduce aún más el tamaño del texto */
-        padding: 8px 0;
-    }
-
-    .navLink {
-        font-size: 14px; /* Ajusta el tamaño de los enlaces */
-    }
-
-    .icon {
-        width: 20px; /* Ajusta el tamaño de los íconos */
-        height: 20px;
-    }
+.iconsalida {
+    width: 20px; /* Tamaño fijo del ícono */
+    height: 20px;
+    flex-shrink: 0; /* Evita que el ícono cambie de tamaño */
 }
 
-/* Media Query para Pantallas de Hasta 768px (Tabletas y Móviles) */
-@media (max-width: 768px) {
-    .container {
-        left: 0; /* Mantiene el menú visible */
-        width: 24%; /* Ajusta el ancho del menú ligeramente más amplio para móviles */
-        height: 100vh; /* Ocupa toda la pantalla */
-        overflow-y: auto; /* Permite desplazamiento vertical si es necesario */
-        background-color: var(--lithg-green); /* Conserva el color principal */
-        padding: 10px; /* Reduce el padding para mejor ajuste en pantallas pequeñas */
-        box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2); /* Acentúa el efecto del menú */
-    }
-
-    .Logo {
-        display: none; /* Oculta el logo en móviles */
-    }
-
-    .navList {
-        margin-top: 0; /* Reduce el margen superior */
-        padding: 0 10px; /* Agrega espacio interno horizontal */
-        width: 100%; /* Se ajusta al nuevo ancho del contenedor */
-    }
-
-    .navItem {
-        padding: 12px 5px; /* Mejora el espaciado entre elementos */
-        font-size: 10px; /* Asegura la legibilidad del texto */
-        transition: background-color 0.3s ease-in-out;
-    }
-
-    .navItem:hover {
-        background-color: #3a3a3a; /* Cambia el color al pasar el ratón */
-        border-radius: 8px; /* Mejora el diseño */
-    }
-
-    .navLink {
-        font-size: 12px; /* Ajusta el tamaño de los textos para mejor proporción */
-    }
-
-    .icon {
-        width: 15px; /* Ajusta proporcionalmente los íconos */
-        height: 20px;
-    }
-
-    .iconFlecha {
-        width: 15px;
-        height: 15px;
-        transition: transform 0.3s ease-in-out; /* Mantenemos la transición */
-    }
-
-    .subContainer {
-        max-height: 0; /* Sublistas cerradas inicialmente */
-        opacity: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
-    }
-
-    .subContainerOpen {
-        max-height: 350px; /* Ajusta ligeramente para un rango mayor */
-        opacity: 1;
-        transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
-    }
-
-    .subList {
-        margin: 10px 5px; /* Mejora el espaciado entre elementos de sublistas */
-        font-size: 12px; /* Reduce ligeramente el tamaño de texto */
-    }
-
-    .subList:hover {
-        background-color: #505050; /* Mejora la visibilidad al pasar el ratón */
-        color: #fff; /* Cambia el color del texto al hover */
-    }
+.logoutButton {
+    display: flex; /* Usa Flexbox para alinear el contenido */
+    align-items: center; /* Alinea verticalmente el ícono y el texto */
+    justify-content: center; /* Alinea horizontalmente el contenido */
+    gap: 10px; /* Espaciado entre el ícono y el texto */
+    width: 100%;
+    padding: 10px 0;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease; /* Transición suave */
 }
 
-/* Media Query para Dispositivos Muy Pequeños (480px o menos) */
-@media (max-width: 480px) {
-    .container {
-        width: 51%; /* El menú ocupa todo el ancho */
-        padding: 0 5px; /* Reduce el padding para maximizar el espacio visible */
-    }
 
-    .navItem {
-        font-size: 12px; /* Ajusta aún más el tamaño del texto */
-        padding: 10px 0; /* Mantiene una separación limpia entre elementos */
-    }
-
-    .navLink {
-        font-size: 15px; /* Ajusta ligeramente para pantallas más pequeñas */
-    }
-
-    .icon {
-        width: 20px; /* Reduce el tamaño de los íconos */
-        height: 20px;
-    }
-
-    .subList {
-        font-size: 15px; /* Reduce el tamaño de las sublistas */
-        padding: 15px; /* Mejora la interacción táctil en pantallas pequeñas */
-    }
+.logoutButton:hover {
+    background-color: #c0392b;
 }

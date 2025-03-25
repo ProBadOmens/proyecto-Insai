@@ -1,148 +1,261 @@
+/* Contenedor principal */
 .loginContainer {
     display: flex;
-    justify-content: space-between;
+    height: 100vh;
+    /* background: linear-gradient(to bottom, #0a0f24, #1b1f38);  */
+    background: var(--white2);
     align-items: center;
-    height: 80vh;
-    background-color: var(--lithg-green); /* Fondo claro institucional */
-    padding: 100px 20px;
-    box-sizing: border-box;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px #3a1c1c;
-}
-.slider {
-    flex: 1;
-    max-width: 350px; /* Ancho máximo para el slider */
-    height: 300px; /* Altura fija para el slider */
-    text-align: center;
-    background-color: #fafafa; /* Fondo blanco */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.897);
-    padding: 20px;
-    overflow: hidden; /* Oculta cualquier contenido que exceda el tamaño del contenedor */
-    position: relative; /* Necesario para posicionar las imágenes */
-    transition: all 0.3s ease-in-out;
-}
-.sliderImage {
-    width: 90%;
-    height: 80%;
-    border-radius: 20px; /* Bordes redondeados */
-    margin-bottom: 15px;
-    transition: all 0.3s ease-in-out;
+    justify-content: center;
 }
 
-
-.sliderText {
-    font-size: 15px;
-    font-family: 'Poppins',sans-serif;
-    font-weight: 700;
-    color: #252525;
-    position: relative;
-    top: -6%;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-}
-
+/* Formulario */
 .loginCard {
     flex: 1;
-    max-width: 285px; /* Ancho máximo del formulario */
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.897);
-    padding: 60px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: var(--white); 
+    padding: 5px;
+    border-radius: 10px; 
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2); 
+    order: 2;
+    margin: auto;
     font-family: 'Poppins', sans-serif;
+    font-weight: 400;
 }
 
 .loginTitle {
-    font-size: 20px;
-    color: #333333;
     margin-bottom: 20px;
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-size: 2rem;
+    color: var(--black);
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
 }
-.submitButton {
-    width: 50%;
-    padding: 5px;
-    background-color: var(--lithg-green); /* Azul institucional */
-    color: #fdfdfde5;
-    border: none;
-    border-radius: 15px;
-    font-size: 15px;
-    font-weight: 600;
+
+.inputGroup {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.icon {
+    position: relative;
+    right: 5%;
     cursor: pointer;
-    transition: background-color 0.4s ease;
+    width: 25px;
+    height: 25px;
 }
-::placeholder{
-    color: #6d6c6c;
-    font-size: 13px;
+
+.iconbtn{
+    width: 20px;
+    height: 15px;
+    position: relative;
+    left: 10px;
+}
+.inputField {
+    flex: 1;
+    padding: 10px 10px;
+    background: var(--grey1);
+    border: 1px solid transparent;
+    border-radius: 5px;
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.1); 
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: var(--black);
+    transition: border-color 0.3s ease-in-out,  box-shadow 0.3s ease-in-out;
+    outline: none;
+}
+.inputField:focus{
+    border-color: var(--lithg-green); 
+    box-shadow: 0 0 5px var(--lithg-green);
+}
+
+.submitButton {
+    width: 100%;
+    margin-top: 20px;
+    padding: 5px 0;
+    background-color: var(--green6); 
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .submitButton:hover {
-    background-color: #66a170; /* Azul más oscuro */
+    background-color: var(--green-hover);
+}
+::placeholder{
+    color: var(--grey3);
 }
 
-/* Contenedor de frases */
-.phraseContainer {
-    margin-top: 20px; /* Espaciado superior respecto al formulario */
-    padding: 10px;
-    background-color: #f9f9f9; /* Fondo claro */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0px 2px 5px rgb(109, 156, 109); /* Sombra suave */
-    text-align: center; /* Centra el texto */
-}
-
-/* Estilo de las frases */
-.phrase {
-    font-family: 'Poppins', sans-serif; /* Fuente moderna */
-    font-size: 11px; /* Tamaño de fuente */
-    color: #303030; /* Color del texto */
-    font-weight: 500;
-    margin: 5px 0; /* Espaciado entre frases */
-    line-height: 1.2; /* Altura de línea */
-}
-
-.iconllave {
-    width: 20px; /* Reduce el tamaño del ícono */
-    height: 12px;
-}
-
-/* Grupo de entrada con ícono */
-.inputGroup {
-    position: relative; /* Contenedor relativo para posicionar el ícono */
+/* Slider */
+.slider {
+    flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 20px; /* Espaciado entre campos */
+    justify-content: center;
+    height: 100vh;
+    background: var(--green-hover); /* Fondo oscuro con gradiente */
+    padding: 10px;
+    box-shadow: inset 0 0 50px rgb(0, 0, 0); 
+    order: 1; 
 }
 
-/* Campo de entrada */
-.inputField {
-    width: 100%; /* Ocupa todo el ancho disponible */
-    padding: 5px 5px 5px 5px; /* Deja espacio para el ícono a la derecha */
-    font-size: 12px;
-    background-color: #ffffffef;
-    color: #4d4c4c;
-    border: 2px solid var(--lithg-green);
-    border-radius: 20px;
-    outline: none;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease-in-out;
-}
-/* Campo de entrada en foco */
-.inputField:focus {
-    border-color: #9eec94d7; /* Cambia el color del borde al enfocar */
+.sliderImage {
+    max-width: 100%;
+    height: 65vh;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.619);
 }
 
+.sliderText {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--white2);
+    text-align: center;
+}
 
-/* Ícono dentro del campo */
-.icon {
-    position: absolute;
-    right: 15px; /* Alinea el ícono a la derecha */
-    width: 20px;
-    height: 20px;
-    cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
-    z-index: 10; /* Asegura que el ícono esté encima del campo */
-    top: 50%; /* Centra el ícono verticalmente */
-    transform: translateY(-50%); /* Ajusta el centrado vertical */
+.frases{
+    margin-top: 20px;
+}
+/* Footer */
+.footer {
+    margin-top: 80px;
+    text-align: center;
+    color: #888888;
+    font-size: 0.9rem;
+}
+
+.footer p {
+    margin: 0;
+    padding: 5px 0;
+}
+
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 0.9rem;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos generales ya existentes */
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 768px) {
+    .loginContainer {
+        flex-direction: column; /* Cambia la dirección a columna */
+        height: auto; /* Ajusta la altura automáticamente */
+        padding: 20px; /* Agrega un poco de espacio alrededor */
+    }
+
+    .loginCard {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        height: auto; /* Ajusta la altura automáticamente */
+        margin-bottom: 20px; /* Espaciado entre el formulario y el slider */
+        padding: 20px; /* Agrega espacio interno */
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Reduce la sombra */
+    }
+
+    .slider {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        height: auto; /* Ajusta la altura automáticamente */
+        padding: 10px; /* Reduce el padding */
+        order: 2; /* Mueve el slider debajo del formulario */
+    }
+
+    .sliderImage {
+        height: 50vh; /* Reduce la altura de la imagen */
+    }
+
+    .sliderText {
+        font-size: 1.2rem; /* Reduce el tamaño del texto */
+    }
+
+    .inputGroup {
+        flex-direction: column; /* Cambia la dirección a columna */
+        align-items: flex-start; /* Alinea los elementos a la izquierda */
+    }
+
+    .icon {
+        position: static; /* Elimina la posición relativa */
+        margin-bottom: 5px; /* Agrega espacio debajo del ícono */
+    }
+
+    .inputField {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        font-size: 1rem; /* Aumenta ligeramente el tamaño del texto */
+    }
+
+    .submitButton {
+        font-size: 1rem; /* Reduce el tamaño del texto */
+        padding: 10px; /* Aumenta el padding */
+    }
+
+    .footer {
+        font-size: 0.8rem; /* Reduce el tamaño del texto */
+        margin-top: 40px; /* Reduce el margen superior */
+    }
+}
+
+/* Media Queries para tabletas */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .loginContainer {
+        flex-direction: row; /* Mantén la dirección en fila */
+        height: auto; /* Ajusta la altura automáticamente */
+        padding: 20px; /* Agrega un poco de espacio alrededor */
+    }
+
+    .loginCard {
+        width: 50%; /* Ocupa la mitad del ancho */
+        height: auto; /* Ajusta la altura automáticamente */
+        padding: 30px; /* Agrega espacio interno */
+    }
+
+    .slider {
+        width: 50%; /* Ocupa la mitad del ancho */
+        height: auto; /* Ajusta la altura automáticamente */
+        padding: 20px; /* Reduce el padding */
+    }
+
+    .sliderImage {
+        height: 60vh; /* Ajusta la altura de la imagen */
+    }
+
+    .sliderText {
+        font-size: 1.3rem; /* Ajusta el tamaño del texto */
+    }
+
+    .inputField {
+        font-size: 0.9rem; /* Ajusta el tamaño del texto */
+    }
+
+    .submitButton {
+        font-size: 1rem; /* Ajusta el tamaño del texto */
+        padding: 10px; /* Ajusta el padding */
+    }
+
+    .footer {
+        font-size: 0.85rem; /* Ajusta el tamaño del texto */
+        margin-top: 60px; /* Ajusta el margen superior */
+    }
 }

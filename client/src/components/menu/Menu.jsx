@@ -1,218 +1,180 @@
-import { useRef, useEffect, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import Footer from '../footer/Footer';
+import React, { useState } from 'react';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import styles from './menu.module.css';
-import homeIcon from '../../../public/home2.svg';
-import flecha from '../../../public/flecha2.svg';
-import admin from '../../../public/admin.svg';
-import hormiga from '../../../public/hormiga.svg';
-import mundo from '../../../public/mundo.svg';
-import grafica from '../../../public/grafica.svg';
+import icon from '../../components/iconos/iconos';
 
+function NavItem({ id, openSubmenus, setOpenSubmenus, selectedItem, setSelectedItem, iconSrc, label, linkTo, children }) {
+    const isOpen = openSubmenus[id]; // Verifica si este submenú está abierto
+    const isSelected = selectedItem === id; // Verifica si este ítem está seleccionado
 
-
-
-
-function Menu() {
-    // Estado para guardar el ítem activo
-    const [activeItem, setActiveItem] = useState(null);
-    // Estado para abrir/cerrar submenus
-    const [openSubmenus, setOpenSubmenus] = useState({});
-    const subContainerRefs = useRef({});
-
-    const toggleMenu = () => {
-        setMenuOpen(!menuOpen); // Alterna el estado de abierto/cerrado
-    };
-
-    // Abrir y cerrar sublista
-    const toggleSubmenu = (id) => {
-        const element = subContainerRefs.current[id]; // Accede al ref específico de la sublista
-        setOpenSubmenus((prev) => {
-            const isOpen = !prev[id];
-            if (element) {
-                if (isOpen) {
-                    element.style.maxHeight = `${element.scrollHeight}px`; // Ajusta la altura automáticamente
-                    element.style.opacity = '1'; // Muestra la sublista
-                } else {
-                    element.style.maxHeight = '0'; // Oculta la sublista
-                    element.style.opacity = '0';
-                }
-            }
-            return { ...prev, [id]: isOpen };
-        });
-    };
-
-    // Función para cambiar el ítem activo
-    const handleItemClick = (id) => {
-        setActiveItem(id); // Cambia el ítem activo
+    const handleClick = () => {
+        if (children) {
+            // Solo alterna el submenú si hay hijos
+            setOpenSubmenus((prev) => ({ ...prev, [id]: !prev[id] }));
+        }
+        setSelectedItem(id); // Marca este ítem como seleccionado
     };
 
     return (
-        <>
-            <div className={styles.container}>
-                <img src={mundo} title="El Mundo Gira Alrededor de su Propio Eje!!!" className={styles.iconmundo} />
+        <li
+            className={`${styles.navItem} ${isOpen ? styles.open : ''} ${isSelected ? styles.selected : ''}`}
+            onClick={handleClick}
+        >
+            {linkTo ? (
+                <Link to={linkTo} className={styles.navLink}>
+                    <img src={iconSrc} alt={label} className={styles.icon} />
+                    <span className={styles.navLabel}>{label}</span>
+                </Link>
+            ) : (
+                <div className={styles.navLink}>
+                    <img src={iconSrc} alt={label} className={styles.icon} />
+                    <span className={styles.navLabel}>{label}</span>
+                    {/* Renderiza la flecha solo si hay hijos */}
+                    {children && (
+                        <img
+                            src={icon.flecha}
+                            alt="Flecha"
+                            className={`${styles.iconFlecha} ${isOpen ? styles.iconRotated : ''}`}
+                        />
+                    )}
+                </div>
+            )}
+            {/* Submenús, si existen */}
+            {children && (
+                <div className={`${styles.submenuContainer} ${isOpen ? styles.submenuOpen : ''}`}>
+                    {children}
+                </div>
+            )}
+        </li>
+    );
+}
 
-                <nav>
-                    <ul className={styles.navList}>
-                        {/* Panel Principal */}
-                        <div>
-                            <li
-                                className={`${styles.navItem} ${
-                                    activeItem === 'panel' ? styles.active : ''
-                                }`}
-                                onClick={() => handleItemClick('panel')}
-                            >
-                                <Link to="/" className={styles.navLink}>
-                                    <img src={homeIcon} alt="Home" className={styles.icon} />
-                                    <span>Panel Principal</span>
+function Menu() {
+    const [openSubmenus, setOpenSubmenus] = useState({}); // Estado para manejar los submenús abiertos
+    const [selectedItem, setSelectedItem] = useState(null); // Estado para manejar el ítem seleccionado
+    const [isCollapsed, setIsCollapsed] = useState(true); // Estado para manejar el colapso del menú
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        navigate('/'); // Redirige al login o cualquier ruta deseada
+    };
+
+    return (
+        <div
+            className={`${styles.container} ${isCollapsed ? styles.collapsed : ''}`}
+            onMouseEnter={() => setIsCollapsed(false)} // Expande el menú al pasar el mouse
+            onMouseLeave={() => setIsCollapsed(true)} // Colapsa el menú al quitar el mouse
+        >
+            <nav className={styles.sidebar}>
+                <ul className={styles.navList}>
+                    <NavItem
+                        id="panel"
+                        openSubmenus={openSubmenus}
+                        setOpenSubmenus={setOpenSubmenus}
+                        selectedItem={selectedItem}
+                        setSelectedItem={setSelectedItem}
+                        iconSrc={icon.homeIcon}
+                        label="Panel Principal"
+                        linkTo="/Home"
+                    />
+                    <NavItem
+                        id="Control de Pestes"
+                        openSubmenus={openSubmenus}
+                        setOpenSubmenus={setOpenSubmenus}
+                        selectedItem={selectedItem}
+                        setSelectedItem={setSelectedItem}
+                        iconSrc={icon.altavoz}
+                        label="Control de Pestes"
+                        linkTo=""
+                    />
+                    
+                    <NavItem
+                        id="categoria"
+                        openSubmenus={openSubmenus}
+                        setOpenSubmenus={setOpenSubmenus}
+                        selectedItem={selectedItem}
+                        setSelectedItem={setSelectedItem}
+                        iconSrc={icon.hormiga}
+                        label="Categorías"
+                    >
+                        <ul className={styles.submenu}>
+                            <li>
+                                <Link
+                                    to="/Vegetal"
+                                    className={`${styles.submenuItem} ${selectedItem === 'vegetal' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('vegetal')}
+                                >
+                                    Vegetales
                                 </Link>
                             </li>
-                        </div>
-
-                        {/* Categorías */}
-                        <div>
-                            <ul
-                                className={`${styles.navItem} ${
-                                    activeItem === 'categoria' ? styles.active : ''
-                                }`}
-                                onClick={() => handleItemClick('categoria')}
-                            >
+                            <li>
                                 <Link
-                                    onClick={() => toggleSubmenu('categoria')}
-                                    className={styles.navLink}
+                                    to="/Animal"
+                                    className={`${styles.submenuItem} ${selectedItem === 'animal' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('animal')}
                                 >
-                                    <img src={hormiga} alt="Icono Hormiga" className={styles.icon} />
-                                    <span>Categoría</span>
-                                    <img
-                                        src={flecha}
-                                        alt="Flecha"
-                                        className={`${styles.iconFlecha} ${
-                                            openSubmenus['categoria'] ? styles.iconRotated : ''
-                                        }`}
-                                    />
-                                </Link>
-
-                                {/* Sublista de Categoría */}
-                                <ul
-                                    ref={(el) => (subContainerRefs.current['categoria'] = el)}
-                                    className={`${styles.subContainer} ${
-                                        openSubmenus['categoria']
-                                            ? styles.subContainerOpen
-                                            : ''
-                                    }`}
-                                >
-                                    <li className={styles.subList}>
-                                        <Link
-                                            to="/vegetal"
-                                            className={styles.subList}
-                                            onClick={() => handleItemClick('vegetal')}
-                                        >
-                                            <span>Vegetales</span>
-                                        </Link>
-                                    </li>
-                                    <li className={styles.subList}>
-                                        <Link
-                                            to="/animal"
-                                            className={styles.subList}
-                                            onClick={() => handleItemClick('animal')}
-                                        >
-                                            <span>Animales</span>
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </ul>
-                        </div>
-
-                        {/* Administrador */}
-                        <div>
-                            <ul
-                                className={`${styles.navItem} ${
-                                    activeItem === 'administrador' ? styles.active : ''
-                                }`}
-                                onClick={() => handleItemClick('administrador')}
-                            >
-                                <Link
-                                    onClick={() => toggleSubmenu('administrador')}
-                                    className={styles.navLink}
-                                >
-                                    <img src={admin} alt="Icono Administrador" className={styles.icon} />
-                                    <span>Administrador</span>
-                                    <img
-                                        src={flecha}
-                                        alt="Flecha"
-                                        className={`${styles.iconFlecha} ${
-                                            openSubmenus['administrador']
-                                                ? styles.iconRotated
-                                                : ''
-                                        }`}
-                                    />
-                                </Link>
-
-                                {/* Sublista de Administrador */}
-                                <ul
-                                    ref={(el) => (subContainerRefs.current['administrador'] = el)}
-                                    className={`${styles.subContainer} ${
-                                        openSubmenus['administrador']
-                                            ? styles.subContainerOpen
-                                            : ''
-                                    }`}
-                                >
-                                    <li className={styles.subList}>
-                                        <Link
-                                            to="/Personas"
-                                            className={styles.subList}
-                                            onClick={() => handleItemClick('Persona')}
-                                        >
-                                            <span>Personas</span>
-                                        </Link>
-                                    </li>
-                                    <li className={styles.subList}>
-                                        <Link
-                                            to="/Usuario"
-                                            className={styles.subList}
-                                            onClick={() => handleItemClick('Usuario')}
-                                        >
-                                            <span>Usuarios</span>
-                                        </Link>
-                                    </li>
-                                    <li className={styles.subList}>
-                                        <Link
-                                            to="/Cargo"
-                                            className={styles.subList}
-                                            onClick={() => handleItemClick('Cargo')}
-                                        >
-                                            <span>Cargos</span>
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </ul>
-                        </div>
-
-                        {/* Estadísticas Generales */}
-                        <div>
-                            <li
-                                className={`${styles.navItem} ${
-                                    activeItem === 'estadisticas' ? styles.active : ''
-                                }`}
-                                onClick={() => handleItemClick('estadisticas')}
-                            >
-                                <Link to="/chart" className={styles.navLink}>
-                                    <img src={grafica} alt="Icono gráfica" className={styles.icon} />
-                                    <span>Estadísticas Generales</span>
+                                    Animales
                                 </Link>
                             </li>
-                        </div>
-                    </ul>
-                    <Footer />
-                </nav>
+                        </ul>
+                    </NavItem>
+                    <NavItem
+                        id="admin"
+                        openSubmenus={openSubmenus}
+                        setOpenSubmenus={setOpenSubmenus}
+                        selectedItem={selectedItem}
+                        setSelectedItem={setSelectedItem}
+                        iconSrc={icon.admin}
+                        label="Administrador"
+                    >
+                        <ul className={styles.submenu}>
+                            <li>
+                                <Link
+                                    to="/Personas"
+                                    className={`${styles.submenuItem} ${selectedItem === 'personas' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('personas')}
+                                >
+                                    Personas
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/Usuario"
+                                    className={`${styles.submenuItem} ${selectedItem === 'usuario' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('usuario')}
+                                >
+                                    Usuarios
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/Cargo"
+                                    className={`${styles.submenuItem} ${selectedItem === 'cargo' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('cargo')}
+                                >
+                                    Cargos
+                                </Link>
+                            </li>
+                        </ul>
+                    </NavItem>
+                </ul>
+                {/* Footer con el botón de salida */}
+                <footer className={styles.footer}>
+                    <button
+                        className={styles.logoutButton}
+                        onClick={handleLogout}
+                        title="Salir del sistema"
+                    >
+                        <img src={icon.salida} alt="Terminar Sesión" className={styles.iconsalida} />
+                        Salir
+                    </button>
+                </footer>
+            </nav>
+            <div className={styles.content}>
                 <Outlet />
             </div>
-        </>
+        </div>
     );
 }
 
 export default Menu;
-
-                    
-
-                        

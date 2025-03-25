@@ -1,285 +1,170 @@
-/* header.module.css */
+/* Header Principal */
 .header {
-    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 60px;
+    background-color: var(--grey2); /* Mantiene el color de fondo */
+    color: #343434; /* Color del texto */
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    position: fixed; 
-    top: 0; 
-    left: 0;
-    width: 100%; 
-    height: 80px;
-    background-color: #535353;
-    color: #ffffff; 
-    padding: 0 20px; 
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-    z-index: 101;
-}
-.hidden {
-    transform: translateY(-100%); 
+    justify-content: space-between; /* Espacio entre los elementos */
+    padding: 0 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.298); /* Sombra ligera */
+    z-index: 2; /* Asegura que el header esté por encima del contenido */
+    
 }
 
-
-.btn{
-    display: flex;
-    position: relative;
-    right: 20%;
-    background-color: #71a171;
-    width: auto;
-    padding: 7px 8px;
-    border-radius: 25px;
-    border: 1px solid transparent;
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: background-color 0.5s ease, transform 0.3s ease; 
-}
-.btn:hover{
-    transform: rotate(15deg);
-    background-color: #d32f2f;
-}
-.btn:active {
-    transform: scale(0.85); 
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); 
-}
-
-.btn2{
-    display: flex;
-    position: relative;
-    right: 20%;
-    background-color: var(--mostaza);
-    width: auto;
-    padding: 8px;
-    border-radius: 20px;
-    border: 1px solid transparent;
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: background-color 0.5s ease, transform 0.3s ease; 
-}
-.btn2:hover{
-    transform: rotate(15deg);
-    background-color: #e4c749;
-}
-.btn2:active {
-    transform: scale(0.85); 
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); 
-}
-.btn3{
-    display: flex;
-    position: relative;
-    right: 20%;
-    background-color: var(--vino-red);
-    width: auto;
-    padding: 8px;
-    border-radius: 20px;
-    border: 1px solid transparent;
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: background-color 0.5s ease, transform 0.3s ease; 
-}
-.btn3:hover{
-    transform: rotate(15deg);
-    background-color: #d32f2f;
-}
-.btn3:active {
-    transform: scale(0.85); 
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); 
-}
-.icon {
-    width: 20px; 
-    height: 20px;
-    cursor: pointer;
-}
-.izquierda {
+/* Logo y título */
+.logoContainer {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 40px;
-    flex: 1;
-    /* position: relative;
-    left: 22%; */
+    position: absolute; /* Posiciona el contenedor del logo y título */
+    left: 50%; /* Centra horizontalmente */
+    transform: translateX(-30%); /* Ajusta el centro del contenedor */
 }
-.spansito{
+
+.logo {
+    width: 80px;
+    height: 65px;
+    margin-right: 10px;
+    transform: translateX(-600%);
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #343434; /* Mantiene el color del título */
+    transform: translateX(-50%);
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+/* Menú del usuario */
+.userMenu {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Empuja el menú de usuario al extremo derecho */
+}
+
+.campanaIcon {
+    width: 30px;
+    height: 30px;
+    margin-right: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Transición suave para el hover */
     position: relative;
-    left: 30%;
-    font-family: 'Poppins', sans-serif;
+    right: 80px;
+}
+.campanaIcon:hover {
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+}
+
+.username {
+    font-size: 1rem;
     font-weight: 600;
-    font-style: normal;
-    text-align: left;
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
-    line-height: 1.2;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    color: #343434; /* Color del texto del usuario */
+    transform: translateX(-150%);
 }
 
-.center {
-    /* position: relative;
-    left: 5%; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 2; 
+/* Responsividad */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .header {
+        padding: 0 15px; /* Reduce el padding en pantallas medianas */
+    }
+
+    .logoContainer {
+        justify-content: flex-start; /* Mantiene el logo alineado a la izquierda */
+    }
+
+    .title {
+        font-size: 1.3rem; /* Reduce el tamaño del título */
+    }
+
+    .logo {
+        width: 60px;
+        height: 55px;
+    }
+
+    .campanaIcon {
+        width: 25px;
+        height: 25px;
+    }
 }
 
-.derecha{
-    display: flex; 
-    align-items: center; 
-    justify-content: flex-end;
-    gap: 15px; 
-    /* position: relative;
-    left: 3%; */
-    flex: 1;
-}
-.searchContainer {
-    display: flex; 
-    align-items: center; 
-    position: relative; 
-    width: 100%; 
-    max-width: 200px; 
-}
-
-.searchBar {
-    flex: 1; 
-    height: 35px;
-    padding: 0 40px 0 15px; 
-    border: 1px solid transparent;
-    border-radius: 20px;
-    font-size: 14px;
-    outline: none;
-    background-color: #ffffff; 
-    color: #000000; 
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
-    transition: all 0.3s ease-in-out;
-    font-family: 'Poppins',sans-serif;
-}
-.searchBar:focus {
-    border: 2px solid var(--lithg-green);
-}
-.icon2 {
-    position: absolute; /* Fija el ícono dentro del contenedor */
-    top: 50%; /* Centra verticalmente el ícono */
-    right: -8px; /* Ajusta la distancia del ícono al borde derecho */
-    transform: translateY(-50%); /* Corrige el centrado vertical */
-    width: 20px; 
-    height: 20px;
-    cursor: pointer;  
-}
-
-.Logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    left: 70px;
-    margin: 0;
-    width: 70px;
-    height: 70px;
-    cursor: pointer;
-    padding: 10px 20px;
-    z-index: 101;
-    /* background-color: #3434342d; */
-    /* border-radius: 20px; */
-    /* border: 1px solid var(--white); */
-    
-}
-.Logo img {
-    width: 7em;
-    height: auto;
-    /* box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2); */
-    cursor: pointer;
-}
-
-/* Media Query para Pantallas Pequeñas (Móviles) */
 @media (max-width: 768px) {
     .header {
-        flex-direction: column; /* Cambia a orientación vertical */
-        height: auto; /* Permite ajustar la altura automáticamente */
-        padding: 0 50px;  /* Reduce el padding */
+        height: 50px; /* Reduce la altura en pantallas pequeñas */
+        padding: 0 10px; /* Reduce el padding */
     }
 
-    .btn, .btn2, .btn3 {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: static; /* Elimina el desplazamiento lateral */
-        margin: 10px 0; /* Añade espacio entre los botones */
-        width: 34px; /* Ajusta el ancho */
-        border-radius: 20px;
-        align-self: center; /* Centra los botones */
+    .logoContainer {
+        justify-content: flex-start; /* Mantiene el logo alineado a la izquierda */
     }
 
-    .icon {
-        width: 20px; /* Reduce el tamaño del ícono */
-        height: 10px;
+    .logo {
+        width: 40px;
+        height: 40px;
     }
 
-    .izquierda {
-        left: 0; /* Elimina el desplazamiento */
-        text-align: center; /* Alinea el texto */
-        margin-bottom: 10px; /* Añade espacio debajo */
+
+    .title {
+        font-size: 1.2rem; /* Reduce el tamaño del título */
+        margin-left: 10px; /* Agrega espacio entre el logo y el título */
     }
 
-    .center {
-        position: static;
-        margin-bottom: 10px;
-        flex-direction: column; /* Acomoda el contenido verticalmente */
-        justify-content: center;
+
+    .campanaIcon {
+        width: 20px;
+        height: 20px;
     }
 
-    .derecha {
-        position: static; /* Corrige la posición para móviles */
-        gap: 10px; /* Reduce el espacio entre los elementos */
-        flex-wrap: wrap; /* Permite que los elementos se ajusten */
-        justify-content: center;
-    }
-
-    .searchContainer {
-        width: 90%; /* Aumenta el ancho de la barra de búsqueda */
-        max-width: none; /* Elimina la restricción de ancho máximo */
-    }
-
-    .searchBar {
-        width: 100%; /* Acomoda la barra de búsqueda al ancho completo */
-        font-size: 12px; /* Reduce el tamaño del texto */
-    }
-
-    .icon2 {
-        right: 10px; /* Ajusta la posición del ícono de búsqueda */
-        width: 18px;
-        height: 18px;
+    .username {
+        font-size: 0.9rem; /* Reduce el tamaño del texto del usuario */
     }
 }
 
-/* Media Query para Pantallas Muy Pequeñas (Móviles Compactos) */
-@media (max-width: 480px) {
+@media  (min-width: 480px) and (max-width: 624px) {
     .header {
-        justify-content: space-around; /* Mejora la distribución en pantallas compactas */
-        font-size: 12px; /* Reduce el tamaño del texto general */
+        padding: 0 5px; /* Reduce aún más el padding */
     }
 
-    .btn, .btn2, .btn3 {
-        font-size: 12px; /* Ajusta el tamaño del texto en los botones */
-        padding: 5px; /* Reduce el padding de los botones */
+    .title {
+        font-size: 1rem; /* Reduce el tamaño del título */
     }
 
-    .icon {
-        width: 12px; /* Reduce aún más el tamaño del ícono */
-        height: 12px;
+    .logo {
+        width: 30px;
+        height: 30px;
     }
 
-    .searchBar {
-        font-size: 10px; /* Reduce el tamaño del texto */
-        padding: 0 30px 0 10px; /* Ajusta el padding interno */
+    .campanaIcon {
+        display: none; /* Oculta el ícono de campana en pantallas muy pequeñas */
     }
 
-    .searchContainer {
-        width: 100%; /* Toma el ancho completo del contenedor */
+    .username {
+        font-size: 0.8rem; /* Reduce aún más el tamaño del texto del usuario */
+    }
+}
+@media  (min-width: 350px) and (max-width: 480px) {
+    .header {
+        padding: 0 5px; /* Reduce aún más el padding */
     }
 
-    .icon2 {
-        right: 5px; /* Ajusta la posición para pantallas más pequeñas */
+    .title {
+        font-size: 1rem; /* Reduce el tamaño del título */
+
+    }
+
+    .logo {
+    display: none;
+    }
+
+    .campanaIcon {
+        display: none; /* Oculta el ícono de campana en pantallas muy pequeñas */
+    }
+
+    .username {
+        font-size: 0.8rem; /* Reduce aún más el tamaño del texto del usuario */
     }
 }

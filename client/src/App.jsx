@@ -18,17 +18,17 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Ruta para Login sin Header, Menu y Footer */}
-        <Route path="/Login" element={<Login />} />
+        <Route path="/" element={<Login />} />
 
         {/* Rutas con el layout principal */}
-        <Route path="/" element={<MainLayout><Home /></MainLayout>}/>
+        <Route path="/Home" element={<MainLayout><Home /></MainLayout>}/>
         <Route path="/Cargo" element={<MainLayout><Cargo /></MainLayout>}/>
         <Route path="/Personas" element={<MainLayout><Personas /></MainLayout>}/>
         <Route path="/Usuario" element={<MainLayout><Usuarios /></MainLayout>}/>
         <Route path="/Animal" element={<MainLayout><Animal /></MainLayout>}/>
         <Route path="/Vegetal" element={<MainLayout><Vegetal /></MainLayout>}/>
         <Route path="/Chart" element={<MainLayout><Chart /></MainLayout>}/>
-        <Route path="*" element={<MainLayout><Error /></MainLayout>}/>
+        <Route path="*" element={<Error />}/>
       </Routes>
     </BrowserRouter>
   );

@@ -15,12 +15,39 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+body{
+  margin: 0;
+  
+}
 
 :root {
   --lithg-green:#98c79a;
   --vino-red: #9a031e;
   --mostaza: #cca011;
-  --white: #edf6f9;
+/* escala de blanco,grises,negro */
+--white: #F8F9FA;
+--white2: #E9ECEF;
+--grey: #DEE2E6;
+--grey2: #CED4DA;
+--grey3: #ADB5BD;
+--grey4: #6C757D;
+--grey5: #495057;
+--grey6: #343A40;
+--grey7: #888888;
+--black: #212529;
+--black1: #343434;
+--black2: #242424;
+/* escala de verdes */
+--green: #E9F5DB;
+--green1: #CFE1B9;
+--green2: #B5C99A;
+--green3: #97A97C;
+--green4: #87986A;
+--green5: #718355;
+--green6: #71894a;
+--green-hover: #5a6d3a;
+--green7: #c7f9cc;
+--green8: #afe6b574;
 }
 /* Letras */
 .poppins-thin {
@@ -134,34 +161,9 @@
 * {
   box-sizing: border-box; /* Asegura que padding y border no excedan el ancho del elemento */
 }
-body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.5;
-  flex-direction: column;
-  min-height: 100vh; 
-  background-color: #f7f7f7;
-}
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; /* Elimina el scroll horizontal */
-  width: 100%; /* Asegura que el ancho no exceda el tamaño de la ventana */
-}
 
-.container {
-  max-width: 100%; /* Asegura que los elementos no excedan el ancho del contenedor */
-  overflow-x: hidden; /* Evita el scroll horizontal dentro de contenedores específicos */
-}
-.main-content {
-  margin-top: 60px; 
-  margin-bottom: 40px; 
-  margin-left: 250px; 
-  padding: 20px; 
-  box-sizing: border-box; 
-}
+
+
 /* estilos adicionales pordefecto vite + react */
 /* a {
   font-weight: 500;
@@ -171,11 +173,6 @@ html, body {
 a:hover {
   color: #535bf2;
 } */
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
 
 /* button {
   border-radius: 8px;

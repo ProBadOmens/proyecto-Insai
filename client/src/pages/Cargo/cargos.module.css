@@ -1,0 +1,202 @@
+/* Contenedor principal del Home */
+.cargoContainer {
+    padding: 20px;
+    background-color: #f5f5f5;
+    min-height: calc(100vh - 60px); /* Resta la altura del header */
+    margin-left: 150px; /* Deja espacio para el menú expandido */
+    margin-top: 50px;
+    margin-right: 50px;
+    transition: margin-left 0.3s ease-in-out; /* Transición suave para el colapso/expansión del menú */
+}
+
+/* Contenedor de filtros */
+.filtersContainer {
+    font-family: 'Poppins',sans-serif;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 15px; /* Espaciado entre los elementos */
+    margin-bottom: 20px; /* Espacio debajo del contenedor */
+}
+
+/* Contenedor de búsqueda */
+.searchContainer {
+    position: relative; /* Contenedor relativo para posicionar el ícono dentro del input */
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+    max-width: 300px; /* Ancho máximo del input */
+}
+
+/* Input de búsqueda */
+.search {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #343434;
+    background-color: var(--whit2);
+    padding: 8px 10px;
+    padding-right: 40px; /* Deja espacio para el ícono dentro del input */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%; /* El input ocupa todo el ancho del contenedor */
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search:focus {
+    border-color: #98c79a;
+    box-shadow: 0 0 5px rgba(152, 199, 154, 0.5);
+}
+
+/* Ícono de lupa */
+.iconlupa {
+    position: absolute; /* Posiciona el ícono dentro del contenedor */
+    top: 50%; /* Centra verticalmente el ícono */
+    right: 15px; /* Espaciado desde el borde derecho del input */
+    transform: translateY(-50%); /* Ajusta el centrado vertical */
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    opacity: 0.7; /* Hace el ícono un poco más sutil */
+    transition: opacity 0.3s ease;
+}
+
+.iconlupa:hover {
+    opacity: 1; /* Aumenta la opacidad al pasar el mouse */
+}
+::placeholder{
+    color: var(--grey3);
+}
+
+.icon{
+    width: 20px;
+    height: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    right: 5px;
+}
+
+.searchInput:focus {
+    border-color: #98c79a;
+    box-shadow: 0 0 5px rgba(152, 199, 154, 0.5);
+}
+
+/* Botón de crear */
+.create {
+    display: flex; /* Activa flexbox */
+    align-items: center; /* Alinea verticalmente el contenido */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    background-color: var(--lithg-green);
+    width: 100px; /* Ancho fijo para consistencia */
+    padding: 7px 10px; /* Espaciado interno */
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--white); /* Color del texto */
+    border: none; /* Elimina el borde */
+    transition: all 0.4s ease-in-out , transform 0.4 ease-in-out;
+}
+
+.create:hover {
+    background-color: #539252d0;
+    transform: scale(1);
+}
+
+.create:active {
+    transform: scale(0.95); /* Reduce el tamaño al hacer clic */
+}
+
+.export {
+    display: flex; /* Activa flexbox */
+    align-items: center; /* Alinea verticalmente el contenido */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    background-color: var(--vino-red);
+    width: 100px; /* Ancho fijo para consistencia */
+    padding: 7px 10px; /* Espaciado interno */
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--white); /* Color del texto */
+    border: none; /* Elimina el borde */
+    transition: all 0.4s ease-in-out , transform 0.4 ease-in-out;
+}
+
+.export:hover {
+    background-color: #931616e0;
+    transform: scale(1);
+}
+
+.export:active {
+    transform: scale(0.95); /* Reduce el tamaño al hacer clic */
+}
+/* Tabla */
+.tableSection {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.431);
+    padding: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 10px;
+    text-align: justify;
+    border-bottom: 1px solid var(--grey2);
+}
+
+.table th {
+    background-color: var(--lithg-green);
+    color: #343434;
+}
+
+.table tr:hover {
+    background-color: var(--green8);
+}
+
+/* Contenedor de los íconos dentro de la tabla */
+.iconContainer {
+    display: flex; /* Activa flexbox */
+    align-items: center; /* Alinea los íconos verticalmente */
+    justify-content: space-evenly; /* Espacia los íconos uniformemente */
+    margin-right: 10px;
+    gap: 2px; /* Espaciado entre los íconos */
+}
+
+
+/* Estilo general para los íconos */
+.iconver,
+.iconeditar,
+.iconpdf,
+.iconeliminar {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconver:hover,
+.iconeditar:hover,
+.iconpdf:hover,
+.iconeliminar:hover {
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el mouse */
+}
+
+
+.iconver:hover{
+    transform: scale(1.1);
+}

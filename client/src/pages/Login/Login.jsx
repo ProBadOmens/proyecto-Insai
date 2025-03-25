@@ -1,20 +1,62 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
 import Insai from '../../../public/assets/insai.png';
 import Perro from '../../../public/assets/perro.png';
 import Importancia from '../../../public/assets/impor.png';
-import user from '../../../public/user.svg';
-import ojito from '../../../public/ojito.svg';
-import ojitoculto from '../../../public/ojitoculto.svg';
-import llave from '../../../public/llave.svg';
+import icon from '../../components/iconos/iconos';
 
+// Componente Slider
+function Slider({ slides, currentSlide }) {
+    return (
+        <div className={styles.slider}>
+            <img
+                src={slides[currentSlide].image}
+                alt={`Slide ${currentSlide + 1}`}
+                className={styles.sliderImage}
+            />
+            <p className={styles.sliderText}>{slides[currentSlide].text}</p>
+        </div>
+    );
+}
+
+// Componente InputGroup
+function InputGroup({ iconSrc, type, placeholder, value, onChange, onClick }) {
+    return (
+        <div className={styles.inputGroup}>
+            <img
+                src={iconSrc}
+                alt="Input Icon"
+                className={styles.icon}
+                onClick={onClick}
+            />
+            <input
+                type={type}
+                className={styles.inputField}
+                placeholder={placeholder}
+                value={value}
+                onChange={onChange}
+            />
+        </div>
+    );
+}
+
+// Componente PhraseContainer
+function PhraseContainer({ randomPhrase }) {
+    return (
+        <div className={styles.phraseContainer}>
+            <p className={styles.phrase}>{randomPhrase}</p>
+        </div>
+    );
+}
+
+// Componente principal Login
 function Login() {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [randomPhrase, setRandomPhrase] = useState('');
     const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar contraseña
-    const navigate = useNavigate(); // Hook para redirigir
-    // Array de frases
+    const navigate = useNavigate();
+
     const phrases = [
         "La seguridad y eficiencia son nuestra prioridad.",
         "Optimiza tus procesos con SIGENSAI.",
@@ -22,23 +64,19 @@ function Login() {
         "Tu aliado en la innovación y eficiencia.",
     ];
 
-    // Array de imágenes y textos del slider
     const slides = [
         { image: Insai, text: 'Bienvenido al sistema SIGENSAI' },
         { image: Perro, text: 'Gestión eficiente y segura' },
         { image: Importancia, text: 'Optimiza tus procesos agrícolas' },
     ];
 
-    // Cambiar el slide actual cada 5 segundos
     useEffect(() => {
         const slideInterval = setInterval(() => {
             setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
         }, 8000);
-
         return () => clearInterval(slideInterval);
     }, []);
 
-    // Cambiar la frase aleatoria cada 5 segundos
     useEffect(() => {
         const phraseInterval = setInterval(() => {
             const randomIndex = Math.floor(Math.random() * phrases.length);
@@ -48,71 +86,60 @@ function Login() {
         return () => clearInterval(phraseInterval);
     }, []);
 
-    // Seleccionar una frase inicial al cargar el componente
     useEffect(() => {
         const randomIndex = Math.floor(Math.random() * phrases.length);
         setRandomPhrase(phrases[randomIndex]);
     }, []);
 
-      // Manejar el envío del formulario
-        const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault(); // Evita el comportamiento predeterminado del formulario
-        navigate('/'); // Redirige a la página deseada (ajusta la ruta según tu configuración)
+        navigate('/Home'); // Redirige a la página deseada
     };
-
-
 
     return (
         <div className={styles.loginContainer}>
-            {/* Slider */}
-            <div className={styles.slider}>
-                <img
-                    src={slides[currentSlide].image}
-                    alt={`Slide ${currentSlide + 1}`}
-                    className={styles.sliderImage}
-                />
-                <p className={styles.sliderText}>{slides[currentSlide].text}</p>
-            </div>
-
             {/* Formulario */}
             <div className={styles.loginCard}>
                 <form onSubmit={handleSubmit}>
                     <h1 className={styles.loginTitle}>Iniciar Sesión</h1>
-                    
-                    <div className={styles.inputGroup}>
-                        <img src={user} alt="Usuario" className={styles.icon} />
-                        <input
-                            type="text"
-                            className={styles.inputField}
-                            placeholder="Usuario"
-                        />
-                    </div>
 
-                    <div className={styles.inputGroup}>
-                        <img
-                            src={showPassword ? ojito : ojitoculto}
-                            alt="Mostrar/Ocultar contraseña"
-                            className={styles.icon}
-                            onClick={() => setShowPassword(!showPassword)} // Cambia el estado al hacer clic
-                        />
-                        <input
-                            type={showPassword ? "text" : "password"} // Cambia el tipo de entrada
-                            className={styles.inputField}
-                            placeholder="Contraseña"
-                        />
-                    </div>
+                    {/* Campo de usuario */}
+                    <InputGroup
+                        iconSrc={icon.user}
+                        type="text"
+                        placeholder="Usuario"
+                    />
 
-                    <button type="submit" title='entrar' className={styles.submitButton}>
+                    {/* Campo de contraseña */}
+                    <InputGroup
+                        iconSrc={showPassword ? icon.ojito : icon.ojitoculto}
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="Contraseña"
+                        onClick={() => setShowPassword(!showPassword)} // Cambia la visibilidad de la contraseña
+                    />
+
+                    <button type="submit" title="Entrar" className={styles.submitButton}>
                         Entrar
-                        <img src={llave} alt="Cerrar sesión" className={styles.iconllave} />
+                        <img src={icon.llave} alt="Cerrar sesión" className={styles.iconbtn} />
                     </button>
                 </form>
 
                 {/* Apartado para frases */}
-                <div className={styles.phraseContainer}>
-                    <p className={styles.phrase}>{randomPhrase}</p>
+                <div className={styles.frases}>
+                    <PhraseContainer randomPhrase={randomPhrase} />
                 </div>
+
+                   {/* footer */}
+            <footer className={styles.footer}>
+                <p>© 2025 SIGENSAI. Todos los derechos reservados.</p>
+                <a href="/terms">Términos de Servicio</a>
+                <a href="/privacy">Política de Privacidad</a>
+            </footer>
             </div>
+
+            {/* Slider */}
+            <Slider slides={slides} currentSlide={currentSlide} />
+
         </div>
     );
 }
