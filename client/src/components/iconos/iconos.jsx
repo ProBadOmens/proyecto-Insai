@@ -24,7 +24,9 @@ import ojito from '../../../public/ojito.svg';
 import ojitoculto from '../../../public/ojitoculto.svg';
 import ver from '../../../public/ver.svg';
 import salida from '../../../public/salida.svg';
-import altavoz from '../../../public/altavoz.svg'
+import altavoz from '../../../public/altavoz.svg';
+import cliente from '../../../public/cliente.svg';
+import bitacora from '../../../public/bitacora.svg';
 
 
 const Iconos = {
@@ -55,6 +57,8 @@ const Iconos = {
     ojito,
     ojitoculto,
     altavoz,
+    cliente,
+    bitacora,
 };
 
 export default Iconos;

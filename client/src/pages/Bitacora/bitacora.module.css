@@ -1,7 +1,7 @@
-/* Contenedor principal del Cargo */
-.cargoContainer {
+/* Contenedor principal del Bitacora */
+.bitacoraContainer {
     padding: 20px;
-    background-color: var(--white1);
+    background-color: #f5f5f5;
     min-height: calc(100vh - 60px); 
     margin-left: 150px; 
     margin-top: 50px;

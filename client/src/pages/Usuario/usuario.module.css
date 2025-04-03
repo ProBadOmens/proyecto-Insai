@@ -1,5 +1,5 @@
-/* Contenedor principal del Cargo */
-.cargoContainer {
+/* Contenedor principal del Usuario */
+.usuarioContainer {
     padding: 20px;
     background-color: var(--white1);
     min-height: calc(100vh - 60px); 

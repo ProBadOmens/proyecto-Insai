@@ -1,6 +1,6 @@
 
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import './App.css';
+// import './App.css';
 import MainLayout from './components/Layouts/MainLayout';
 import Error from './pages/Error/Error';
 import Login from './pages/Login/Login';
@@ -10,7 +10,8 @@ import Personas from './pages/Persona/Persona';
 import Usuarios from './pages/Usuario/Usuario';
 import Animal from './pages/Animal/Animales';
 import Vegetal from './pages/Vegetal/Vegetales';
-import Chart from './pages/Chart/Chart'
+import Chart from './pages/Chart/Chart';
+import Bitacora from './pages/Bitacora/Bitacora';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/Animal" element={<MainLayout><Animal /></MainLayout>}/>
         <Route path="/Vegetal" element={<MainLayout><Vegetal /></MainLayout>}/>
         <Route path="/Chart" element={<MainLayout><Chart /></MainLayout>}/>
+        <Route path="/Bitacora" element={<MainLayout><Bitacora /></MainLayout>}/>
         <Route path="*" element={<Error />}/>
       </Routes>
     </BrowserRouter>

@@ -1,12 +1,12 @@
 /* Contenedor principal del Home */
 .homeContainer {
     padding: 20px;
-    background-color: #f5f5f5;
-    min-height: calc(100vh - 60px); /* Resta la altura del header */
-    margin-left: 150px; /* Deja espacio para el menú expandido */
+    background-color: var(--white1);
+    min-height: calc(100vh - 60px); 
+    margin-left: 150px; 
     margin-top: 50px;
     margin-right: 50px;
-    transition: margin-left 0.3s ease-in-out; /* Transición suave para el colapso/expansión del menú */
+    transition: margin-left 0.3s ease-in-out; 
 }
 
 
@@ -21,7 +21,7 @@
     flex: 1;
     background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.483);
     padding: 20px;
     text-align: center;
     transition: transform 0.3s ease;
@@ -61,54 +61,55 @@
     font-weight: 400;
     font-size: 15px;
     width: 12%;
-    padding: 5px 10px; /* Espaciado interno para hacerlo más cómodo */
-    border: 1px solid #ccc; /* Borde suave */
-    border-radius: 8px; /* Bordes redondeados */
-    background-color: var(--white1); /* Fondo claro */
-    color: #242424; /* Color del texto */
-    outline: none; /* Elimina el borde azul al hacer clic */
-    transition: all 0.3s ease; /* Transición suave para hover y focus */
-    cursor: pointer; /* Cambia el cursor a pointer */
-}
-.chartSelect:hover {
-    border-color: #98c79a; /* Cambia el color del borde al pasar el mouse */
-    background-color: #ffffff; /* Fondo blanco al pasar el mouse */
+    padding: 5px 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    background-color: #ffffff; 
+    color: #242424; 
+    outline: none; 
+    transition: all 0.3s ease; 
+    cursor: pointer; 
+    /* appearance: none; */
 }
 .chartSelect:focus {
-    border-color: #98c79a; /* Cambia el color del borde al enfocar */
-    box-shadow: 0 0 5px #98c79a; /* Agrega un efecto de sombra */
+    border-color: #98c79a; 
+    box-shadow: 0 0 5px #98c79a; 
+}
+/* Personalización de las opciones */
+.chartSelect option {
+    background-color: #c5e5c795;
+    color: #242424; 
+    padding: 5px;
+    cursor: pointer;
 }
 
+
 .dateInput {
-    padding: 5px 10px; /* Espaciado interno */
-    border: 1px solid var(--lithg-green); /* Borde suave */
-    border-radius: 8px; /* Bordes redondeados */
-    background-color: var(--white1); /* Fondo claro */
-    color: #242424; /* Color del texto */
-    font-size: 1rem; /* Tamaño de fuente */
-    outline: none; /* Elimina el borde azul al hacer clic */
-    transition: all 0.3s ease; /* Transición suave para hover y focus */
-    cursor: pointer; /* Cambia el cursor a pointer */
+    padding: 5px 10px; 
+    border: 1px solid var(--lithg-green); 
+    border-radius: 8px; 
+    background-color: var(--white); 
+    color: #242424; 
+    font-size: 1rem; 
+    outline: none; 
+    transition: all 0.3s ease; 
+    cursor: pointer; 
     font-family: 'Poppins',sans-serif;
     font-weight: 400;
     font-size: 12px;
 }
 
-.dateInput:hover {
-    border-color: #98c79a; /* Cambia el color del borde al pasar el mouse */
-}
 
 .dateInput:focus {
-    border-color: #98c79a; /* Cambia el color del borde al enfocar */
-    box-shadow: 0 0 5px rgba(152, 199, 154, 0.5); /* Agrega un efecto de sombra */
+    border-color: #98c79a; 
+    box-shadow: 0 0 5px rgba(152, 199, 154, 0.5); 
 }
 /* Personalización del ícono del selector de fecha */
 .dateInput::-webkit-calendar-picker-indicator {
-    cursor: pointer; /* Cambia el cursor al ícono del selector de fecha */
-    filter: invert(100%); /* Cambia el color del ícono a negro */
-    opacity: 0.8; /* Ajusta la opacidad del ícono */
+    cursor: pointer; 
+    filter: invert(100%); 
+    opacity: 0.8; 
 }
-
 
 
 .chartContainer {
@@ -125,46 +126,3 @@
     justify-content: center;
 }
 
-
-/* Tabla */
-.tableSection {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.431);
-    padding: 20px;
-}
-
-.table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.table th,
-.table td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid var(--grey2);
-}
-
-.table th {
-    background-color: var(--lithg-green);
-    color: #343434;
-}
-
-.table tr:hover {
-    background-color: var(--green8);
-}
-
-.iconver{
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    transition: transform 0.4s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.iconver:hover{
-    transform: scale(1.1);
-}

@@ -1,16 +1,26 @@
 import React from 'react';
-import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js'; // Importa el plugin Title
+import { Pie, Bar, Line } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title, CategoryScale, LinearScale, BarElement, PointElement, LineElement } from 'chart.js';
 
 // Registro de los elementos necesarios de Chart.js
-ChartJS.register(ArcElement, Tooltip, Legend, Title); // Asegúrate de registrar el plugin Title
+ChartJS.register(
+    ArcElement,
+    Tooltip,
+    Legend,
+    Title,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    PointElement,
+    LineElement
+);
 
-const PieChart = () => {
+const ChartComponent = ({ type, filter }) => {
     const data = {
         labels: ['Cuarentena', 'Rutinas', 'Programas', 'Inspectores', 'Clientes'], // Etiquetas de las categorías
         datasets: [
             {
-                label: 'Distribución de colores',
+                label: filter === 'avales' ? 'Avales por vencer' : filter === 'clientes' ? 'Clientes Registrados' : 'Cuarentenas',
                 data: [12, 19, 3, 5, 2], // Datos para la gráfica
                 backgroundColor: [
                     '#FF6384', // Rojo
@@ -62,7 +72,16 @@ const PieChart = () => {
         },
     };
 
-    return <Pie data={data} options={options} />;
+    // Renderiza la gráfica según el tipo seleccionado
+    if (type === 'Bar') {
+        return <Bar data={data} options={options} />;
+    } else if (type === 'line') {
+        return <Line data={data} options={options} />;
+    } else if (type === 'pie') {
+        return <Pie data={data} options={options} />;
+    } else {
+        return <p>Tipo de gráfica no soportado</p>;
+    }
 };
 
-export default PieChart;
+export default ChartComponent;

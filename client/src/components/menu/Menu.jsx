@@ -157,6 +157,16 @@ function Menu() {
                             </li>
                         </ul>
                     </NavItem>
+                    <NavItem
+                        id="bitacora"
+                        openSubmenus={openSubmenus}
+                        setOpenSubmenus={setOpenSubmenus}
+                        selectedItem={selectedItem}
+                        setSelectedItem={setSelectedItem}
+                        iconSrc={icon.bitacora}
+                        label="Bitacora"
+                        linkTo="/Bitacora"
+                    />
                 </ul>
                 {/* Footer con el botón de salida */}
                 <footer className={styles.footer}>

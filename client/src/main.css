@@ -8,7 +8,7 @@
 
   color-scheme: light dark;
   color: rgba(10, 10, 10, 0.863);
-  background-color: #ffffffef;
+  background-color: #fffffff3;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -159,49 +159,336 @@ body{
 }
 
 * {
-  box-sizing: border-box; /* Asegura que padding y border no excedan el ancho del elemento */
+  box-sizing: border-box; 
 }
 
 
 
-/* estilos adicionales pordefecto vite + react */
-/* a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+/* Estilos para el modal /////////////////////////*/
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
-a:hover {
-  color: #535bf2;
-} */
 
-/* button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.modal {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  color: #e70d0d;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}  */
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.saveButton {
+  padding: 10px 15px;
+  background-color: var(--lithg-green);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+.saveButton:hover {
+  background-color: #539252;
+}
+
+
+/* estilo para tablas ////////////////////////////////// */
+
+/* Contenedor de filtros */
+.filtersContainer {
+  font-family: 'Poppins',sans-serif;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 15px; 
+  margin-bottom: 20px; 
+}
+
+/* Contenedor de búsqueda */
+.searchContainer {
+  position: relative; 
+  width: 100%; 
+  max-width: 300px; 
+}
+
+/* Input de búsqueda */
+.search {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #343434;
+  background-color: var(--whit2);
+  padding: 8px 10px;
+  padding-right: 40px; 
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%; 
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search:focus {
+  border-color: #98c79a;
+  box-shadow: 0 0 5px rgba(152, 199, 154, 0.5);
+}
+
+/* Ícono de lupa */
+.iconlupa {
+  position: absolute; 
+  top: 50%; 
+  right: 15px; 
+  transform: translateY(-50%); 
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: 0.7; 
+  transition: opacity 0.3s ease;
+}
+
+.iconlupa:hover {
+  opacity: 1; 
+}
+::placeholder{
+  color: var(--grey3);
+}
+
+.icon{
+  width: 20px;
+  height: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  right: 5px;
+}
+
+.searchInput:focus {
+  border-color: #98c79a;
+  box-shadow: 0 0 5px rgba(152, 199, 154, 0.5);
+}
+
+/* Botón de crear */
+.create {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background-color: var(--lithg-green);
+  width: 100px; 
+  padding: 7px 10px; 
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--white); 
+  border: none; 
+  transition: all 0.4s ease-in-out , transform 0.4 ease-in-out;
+}
+
+.create:hover {
+  background-color: #539252d0;
+  transform: scale(1);
+}
+
+.create:active {
+  transform: scale(0.95); 
+}
+/* boton pdf general */
+.export {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background-color: var(--vino-red);
+  width: 100px; 
+  padding: 7px 10px; 
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--white); 
+  border: none;
+  transition: all 0.4s ease-in-out , transform 0.4 ease-in-out;
+}
+
+.export:hover {
+  background-color: #931616e0;
+  transform: scale(1);
+}
+
+.export:active {
+  transform: scale(0.95); 
+}
+/* Tabla */
+.tableSection {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.431);
+  padding: 20px;
+}
+/* estilos de tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: justify;
+  border-bottom: 1px solid var(--grey2);
+  white-space: normal; /* Evita que el texto se divida en varias líneas */
+  word-wrap: break-word; /* Ajusta las palabras largas */
+  max-width: 120px; /* Establece un ancho máximo para las celdas */
+  line-height: 1;
+  /* overflow: hidden; Oculta el contenido que exceda el ancho */
+  /* text-overflow: ellipsis; Agrega puntos suspensivos al texto largo */
+}
+
+.table th {
+  background-color: var(--lithg-green);
+  color: #343434;
+}
+
+.table tr:hover {
+  background-color: var(--green8);
+}
+
+/* Contenedor de los íconos dentro de la tabla */
+.iconContainer {
+  display: flex; 
+  align-items: center; 
+  justify-content: space-evenly; 
+  margin-right: 10px;
+  gap: 2px; 
+}
+
+
+/* Estilo general para los íconos */
+.iconver,
+.iconeditar,
+.iconpdf,
+.iconeliminar {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconver:hover,
+.iconeditar:hover,
+.iconpdf:hover,
+.iconeliminar:hover {
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el mouse */
+}
+
+
+/* Estilos para el footer de la tabla */
+.tableFooter {
+  font-family: 'Poppins',sans-serif;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 2px; 
+  margin-top: 20px; 
+}
+
+
+.iconBack, .iconNext {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconBack:hover, .iconNext:hover {
+  transform: scale(1.1);
+}
+/* Estilos para inputs */
+
+.input,
+.textarea,
+.date,
+.password,
+.select {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  width: 100%;
+  padding: 5px 10px; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  background-color: #ffffff; 
+  color: #242424; 
+  outline: none; 
+  transition: all 0.3s ease; 
+}
+
+.input:focus,
+.password:focus,
+.date:focus,
+.select:focus,
+.textarea:focus {
+    border-color: #98c79a;
+    box-shadow: 0 0 5px rgba(152, 199, 154, 0.5);
+}
+.select:hover{
+  cursor: pointer; 
+}
+.select option {
+    background-color: #c5e2c796;
+    color: #242424; 
+    padding: 5px;
+    cursor: pointer;
+}
+
+.date::-webkit-calendar-picker-indicator {
+  cursor: pointer; 
+  filter: invert(100%); 
+  opacity: 0.8; 
+}
+
