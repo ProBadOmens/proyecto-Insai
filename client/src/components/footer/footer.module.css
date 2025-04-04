@@ -1,71 +1,31 @@
-/* final de la pagina */
+/* Estilo general del footer */
 .footer {
-    position: fixed; 
-    bottom: 0; 
-    left: 0; 
-    max-width: 600px; /* Ancho máximo */
-    min-width: 150px;
-    border-radius: 0 4px 4px 0;
-    background-color: #535353; 
-    color: #ffffff; 
-    text-align: center; 
-    padding: 0; 
-    font-size: 10px; 
-    z-index: 202; 
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
+    position: relative; 
+    bottom: 1em;
+    left: 0;
+    width: 100%; 
+    background-color: var(--white1);
+    color: #242424;
+    text-align: center;
+    padding: 5px 0; 
+    font-size: 14px;
 }
 
+.footer a {     
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
 
-@media (max-width: 1400px) {
-    .footer {
-        width: 20.5%; 
-        max-width: 280px; 
-        min-width: 150px;
-        border-radius: 0 4px 4px 0; 
-    }
-}
-@media (max-width: 1270px) {
-    .footer {
-        width: 25.2%; 
-        max-width: 220px; 
-        min-width: 140px;
-        border-radius: 0 4px 4px 0; 
-    }
-}
-@media (max-width: 1000px) {
-    .footer {
-        width: 25.9%; 
-        max-width: 220px; 
-        min-width: 130px;
-        border-radius: 0 4px 4px 0; 
-    }
-}
-@media (max-width: 970px) {
-    .footer {
-        width: 40%;
-        max-width: 220px; 
-        min-width: 120px;
-        border-radius: 0 4px 4px 0; 
-    }
-}
-@media (max-width: 870px ) {
-    .footer {
-        width: 40%;
-        max-width: 220px; 
-        min-width: 110px;
-        border-radius: 0 4px 4px 0; 
-    }
-}
+/* Asegura que el footer sea visible en pantallas pequeñas */
 @media (max-width: 770px) {
     .footer {
-        width: 100%;
-        max-width: none; 
-        min-width: 150px;
-        border-radius: 0; 
+        border-radius: 0;
     }
 }
+
 @media (max-width: 470px) {
     .footer {
-        opacity: 0;
+        opacity: 1; /* Asegura que sea visible */
     }
 }

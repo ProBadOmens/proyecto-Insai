@@ -1,6 +1,6 @@
 import Header from '../header/Header';
 import Menu from '../menu/Menu';
-// import Footer from '../footer/Footer';
+import Footer from '../footer/Footer';
 
 function MainLayout({ children }) {
     return (
@@ -10,7 +10,7 @@ function MainLayout({ children }) {
         <div className="main-content">
             {children}
         </div>
-    {/* <Footer /> */}
+    <Footer />
     </>
     );
 }

@@ -1,5 +1,7 @@
 configuraciones para el servidor paquete json.
 
+nmp install
+
 instalacion node , express y demas  //// comandos
 node = npm init -y
 express ,cors y morgan = npm i express cors morgan

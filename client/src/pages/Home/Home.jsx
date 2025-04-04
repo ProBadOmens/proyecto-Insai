@@ -1,15 +1,78 @@
 import React, { useState } from 'react';
-import styles from '../Home/home.module.css';
+import styles from './home.module.css';
 import '../../main.css';
 import icon from '../../components/iconos/iconos';
 import Chart from '../../components/chart/chart4';
+import SearchBar from "../../components/searchbart/SearchBar";
 
 function Home() {
+
+        // Datos iniciales
+        const datosIniciales = [
+            {
+                id: "1",
+                fecha: "3/3/2024",
+                inspector: "José Chirinos ",
+                inspección: "Rutina",
+                hacienda: "Hacienda Napoles",
+                estado: "En Progreso",
+            },
+            {
+                id: "2",
+                fecha: "2/20/2025",
+                inspector: "Yulisca Alvares ",
+                inspección: "Seguimiento",
+                hacienda: "Hacienda Palmas",
+                estado: "Completado",
+            },
+            {
+                id: "3",
+                fecha: "1/3/2025",
+                inspector: "Ramiro Hernandez",
+                inspección: "seguimiento",
+                hacienda: "Hacienda Bourareña",
+                estado: "En Progreso",
+            },
+            {
+                id: "4",
+                fecha: "3/3/2025",
+                inspector: "Edgar Ramirez ",
+                inspección: "Rutina",
+                hacienda: "Refineria La Esmeralda",
+                estado: "En Lista",
+            },
+            // Agrega más datos si es necesario
+            ];  
+
+
     const [chartType, setChartType] = useState('Bar'); // Estado para el tipo de gráfica
     const [chartFilter, setChartFilter] = useState('avales'); // Estado para el filtro
     const [dateRange, setDateRange] = useState({ from: '', to: '' }); // Estado para el rango de fechas
+    const [datosFiltrados, setDatosFiltrados] = useState(datosIniciales);
+    const [currentPage, setCurrentPage] = useState(1); // Página actual
+    const itemsPerPage = 2; // Número de elementos por página
+    
+        // Calcular los datos para la página actual
+        const indexOfLastItem = currentPage * itemsPerPage;
+        const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+        const currentData = datosFiltrados.slice(indexOfFirstItem, indexOfLastItem);
+    
+    
+       // Cambiar a la página anterior
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
 
-    const handleChartTypeChange = (event) => {
+    // Cambiar a la página siguiente
+    const handleNextPage = () => {
+        if (indexOfLastItem < datosFiltrados.length) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+    
+        const handleChartTypeChange = (event) => {
         setChartType(event.target.value); // Actualiza el tipo de gráfica seleccionada
     };
 
@@ -20,6 +83,68 @@ function Home() {
     const handleDateChange = (field, value) => {
         setDateRange((prev) => ({ ...prev, [field]: value })); // Actualiza el rango de fechas
     };
+
+     // Componente para el encabezado de la tabla
+    const EncabezadoTabla = () => (
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Inspector</th>
+            <th>Inspección</th>
+            <th>Hacienda</th>
+            <th>Estado</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    );
+     // Componente para el cuerpo de la tabla
+    const CuerpoTabla = ({ datos }) => (
+        <tbody>
+            {datos.map((item, index) => (
+            <tr key={index}>
+                <td>{item.id}</td>
+                <td>{item.fecha}</td>
+                <td>{item.inspector}</td>
+                <td>{item.inspección}</td>
+                <td>{item.hacienda}</td>
+                <td>{item.estado}</td>
+                <td>
+                <div className='iconContainer'>
+                    <img
+                    src={icon.ver}
+                    alt="VEr mas"
+                    className='iconver'
+                    title="Ver mas"
+                    />
+                </div>
+                </td>
+            </tr>
+            ))}
+        </tbody>
+    );
+    
+        // Componente para el pie de la tabla (paginación)
+        const PieTabla = () => (
+        <div className='tableFooter'>
+            <img
+            src={icon.flecha3}
+            alt="Anterior"
+            className='iconBack'
+            title="Anterior"
+            onClick={handlePreviousPage}
+            />
+            <span>{currentPage}</span>
+            <img
+            src={icon.flecha2}
+            alt="Siguiente"
+            className='iconNext'
+            title="Siguiente"
+            onClick={handleNextPage}
+            />
+        </div>
+        );
+
 
     return (
         <div className={styles.homeContainer}>
@@ -104,65 +229,17 @@ function Home() {
                 <div className='filtersContainer'>
                     <h2>Operaciones Recientes</h2>
                     <div className='searchContainer'>
-                        <input
-                            type="search"
-                            className='search'
-                            placeholder="Buscar inspector..."
-                            title="Buscar inspector"
-                        />
+                        <SearchBar data={datosIniciales} onSearch={setDatosFiltrados} />
                         <img src={icon.lupa} alt="Buscar" className='iconlupa' />
                     </div>
                 </div>
 
                 <table className='table'>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Inspector</th>
-                            <th>Tipo de Ins.</th>
-                            <th>Hacienda</th>
-                            <th>Estado</th>
-                            <th>Fecha</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Danel Reyes</td>
-                            <td>Seguimiento</td>
-                            <td>Hacienda Nápoles</td>
-                            <td>Completado</td>
-                            <td>2025-03-24</td>
-                            <td><img src={icon.ver} alt="Ver Mas" className='iconver' /></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jeramy Cañizalez</td>
-                            <td>Seguimiento</td>
-                            <td>Finca Los Almendros</td>
-                            <td>En Progreso</td>
-                            <td>2025-03-28</td>
-                            <td><img src={icon.ver} alt="Ver Mas" className='iconver' /></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>José Martines</td>
-                            <td>Rutina</td>
-                            <td>La Granja de Mis Sueños</td>
-                            <td>Pendiente</td>
-                            <td>2025-04-01</td>
-                            <td><img src={icon.ver} alt="Ver Mas" className='iconver' /></td>
-                        </tr>
-                    </tbody>
+                    <EncabezadoTabla />
+                    <CuerpoTabla datos={currentData} />
                 </table>
-
-                {/* Footer Tabla */}
-                <div className='tableFooter'>
-                    <img src={icon.flecha3} alt="BACK" title='Anterior' className='iconBack' />
-                    <span>1</span>
-                    <img src={icon.flecha2} alt="NEXT" title='Siguiente' className='iconNext' />
-                </div>
+                {/* Contenedor para Footer en tabla */}
+                <PieTabla/>
             </div>
         </div>
     );

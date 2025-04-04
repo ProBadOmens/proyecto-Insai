@@ -2,4 +2,4 @@
 node_modules
 
 # environment // ambiente de variables 
-# .env
+.env

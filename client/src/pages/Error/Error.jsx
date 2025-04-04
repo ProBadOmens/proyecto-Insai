@@ -11,7 +11,7 @@ function Error() {
             <p className={styles.errorMessage}>
                 Lo sentimos, la página que estás buscando no existe o ha sido movida.
             </p>
-            <Link to="/" className={styles.homeButton}>
+            <Link to="/Home" className={styles.homeButton}>
                 Volver al inicio
             </Link>
         </div>

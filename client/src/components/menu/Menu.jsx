@@ -78,16 +78,67 @@ function Menu() {
                         linkTo="/Home"
                     />
                     <NavItem
-                        id="Control de Pestes"
+                        id="Agentes Agropecuarios"
                         openSubmenus={openSubmenus}
                         setOpenSubmenus={setOpenSubmenus}
                         selectedItem={selectedItem}
                         setSelectedItem={setSelectedItem}
-                        iconSrc={icon.altavoz}
-                        label="Control de Pestes"
-                        linkTo=""
+                        iconSrc={icon.cliente}
+                        label="Agentes Agropecuarios"
+                        linkTo="/*"
                     />
-                    
+                    <NavItem
+                        id="Inspecciones"
+                        openSubmenus={openSubmenus}
+                        setOpenSubmenus={setOpenSubmenus}
+                        selectedItem={selectedItem}
+                        setSelectedItem={setSelectedItem}
+                        iconSrc={icon.escudobien}
+                        label="Inspecciones"
+                        linkTo="/*"
+                    />
+                   {/* Medidas de Prevencion ///////////////////7 */}
+                    <NavItem
+                            id="medidasprevencion"
+                            openSubmenus={openSubmenus}
+                            setOpenSubmenus={setOpenSubmenus}
+                            selectedItem={selectedItem}
+                            setSelectedItem={setSelectedItem}
+                            iconSrc={icon.escudomalo}
+                            label="Medidas de Prevención"
+                        >
+                        <ul className={styles.submenu}>
+                            <li>
+                                <Link
+                                    to="/*"
+                                    className={`${styles.submenuItem} ${selectedItem === 'programas' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('programas')}
+                                >
+                                    Programas
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/Animal"
+                                    className={`${styles.submenuItem} ${selectedItem === 'cuarentenafitosanitaria' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('cuarentenafitosanitaria')}
+                                >
+                                    Cuarentena Fitosanitaria
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/*"
+                                    className={`${styles.submenuItem} ${selectedItem === 'cuarentenazoosanitaria' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('cuarentenazoosanitaria')}
+                                >
+                                    Cuarentena Zoosanitaria
+                                </Link>
+                            </li>
+                        </ul>
+                    </NavItem>
+
+                      {/* Categoriasssssssssssss */}
                     <NavItem
                         id="categoria"
                         openSubmenus={openSubmenus}
@@ -116,8 +167,77 @@ function Menu() {
                                     Animales
                                 </Link>
                             </li>
+                            <li>
+                                <Link
+                                    to="/*"
+                                    className={`${styles.submenuItem} ${selectedItem === 'insumos' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('insumos')}
+                                >
+                                    Repertorio de Insumos
+                                </Link>
+                            </li>
                         </ul>
                     </NavItem>
+
+                    {/* Gestion de Operaciones */}
+                    <NavItem
+                        id="Gestion de Operaciones"
+                        openSubmenus={openSubmenus}
+                        setOpenSubmenus={setOpenSubmenus}
+                        selectedItem={selectedItem}
+                        setSelectedItem={setSelectedItem}
+                        iconSrc={icon.altavoz}
+                        label="Gestion de Operaciones"
+                    >
+                        <ul className={styles.submenu}>
+                            <li>
+                                <Link
+                                    to="/*"
+                                    className={`${styles.submenuItem} ${selectedItem === 'controlfitosanitario' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('controlfitosanitario')}
+                                >
+                                    Control Fitosanitario
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/*"
+                                    className={`${styles.submenuItem} ${selectedItem === 'controlzoosanitario' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('controlzoosanitario')}
+                                >
+                                    Control Zoosanitario
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/*"
+                                    className={`${styles.submenuItem} ${selectedItem === 'controlvacunacion' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('controlvacunacion')}
+                                >
+                                    Control de Vacunación
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/*"
+                                    className={`${styles.submenuItem} ${selectedItem === 'epidemiologiafitosanitaria' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('epidemiologiafitosanitaria')}
+                                >
+                                    Epidemiología Fitosanitaria
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/*"
+                                    className={`${styles.submenuItem} ${selectedItem === 'epidemiologiazoosanitaria' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('epidemiologiazoosanitaria')}
+                                >
+                                    Epidemiología Zoosanitaria
+                                </Link>
+                            </li>
+                        </ul>
+                    </NavItem>
+                
                     <NavItem
                         id="admin"
                         openSubmenus={openSubmenus}

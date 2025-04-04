@@ -27,6 +27,8 @@ import salida from '../../../public/salida.svg';
 import altavoz from '../../../public/altavoz.svg';
 import cliente from '../../../public/cliente.svg';
 import bitacora from '../../../public/bitacora.svg';
+import escudobien from '../../../public/escudobien.svg';
+import escudomalo from '../../../public/escudomalo.svg';
 
 
 const Iconos = {
@@ -59,6 +61,8 @@ const Iconos = {
     altavoz,
     cliente,
     bitacora,
+    escudobien,
+    escudomalo,
 };
 
 export default Iconos;

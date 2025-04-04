@@ -1,22 +1,22 @@
 .container {
     display: flex;
-    overflow: hidden; /* Evita que el contenido desborde */
+    overflow: hidden; 
 }
 
 .sidebar {
-    position: fixed; /* Fija el menú en su posición */
-    top: 0; /* Alinea el menú con la parte superior de la ventana */
-    left: 0; /* Alinea el menú con el lado izquierdo de la ventana */
-    background-color: var(--grey2); /* Fondo del menú */
-    color: var(--black); /* Color del texto */
-    width: 250px; /* Ancho del menú expandido */
-    height: 100vh; /* Asegura que el menú ocupe toda la altura de la ventana */
-    transition: width 0.3s ease-in-out; /* Transición suave al colapsar/expandir */
-    overflow: hidden; /* Oculta el contenido que exceda el ancho */
-    z-index: 1; /* Asegura que el menú esté por encima del contenido principal */
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    background-color: var(--grey2); 
+    color: var(--black); 
+    width: 280px; 
+    height: 100vh; 
+    transition: width 0.3s ease-in-out; 
+    overflow: hidden; 
+    z-index: 1; 
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Esto coloca el footer al final */
+    justify-content: space-between; 
 }
 
 .container.collapsed .sidebar {
@@ -29,7 +29,37 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    overflow-y: auto;
+    max-height: calc(100vh - 60px - 60px); /* Resta la altura del footer */
+    scrollbar-width: thin; /* Para navegadores como Firefox */
+    scrollbar-color: #555 #e0e0e0; /* Color del scroll y del fondo */
 }
+
+.navList {
+    scroll-behavior: smooth; /* Desplazamiento suave */
+}
+
+/* Estilo para navegadores basados en WebKit (Chrome, Edge, Safari) */
+.navList::-webkit-scrollbar {
+    width: 8px; /* Ancho del scroll */
+}
+
+.navList::-webkit-scrollbar-track {
+    background: #e0e0e0; /* Color del fondo del scroll */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+.navList::-webkit-scrollbar-thumb {
+    background-color: #555; /* Color del scroll */
+    border-radius: 10px; /* Bordes redondeados */
+    border: 2px solid #e0e0e0; /* Espaciado entre el scroll y el fondo */
+}
+
+.navList::-webkit-scrollbar-thumb:hover {
+    background-color: #333; /* Color del scroll al pasar el mouse */
+}
+
+
 
 .navItem {
     display: flex;
@@ -56,11 +86,12 @@
     text-decoration: none;
     color: inherit;
     width: 100%;
+    font-size: 15.5px;
 }
 
 .icon {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     margin-right: 15px;
     transition: margin 0.3s ease;
 }
@@ -95,11 +126,12 @@
 
 .submenu {
     list-style: none;
-    padding-left: 20px; /* Desplaza las sublistas a la derecha */
+    padding-left: 18px; /* Desplaza las sublistas a la derecha */
     margin: 0;
 }
 
 .submenuItem {
+    font-size: 14.5px;
     padding: 10px 15px;
     text-decoration: none;
     color: #444444;
@@ -110,7 +142,7 @@
 
 .submenuItem:hover {
     color: #fff;
-    padding-left: 25px; /* Añade un efecto de desplazamiento al pasar el mouse */
+    padding-left: 20px; /* Añade un efecto de desplazamiento al pasar el mouse */
     border-bottom: 1px solid var(--vino-red);
 }
 
@@ -139,11 +171,15 @@
 }
 /* footer menu */
 .footer {
-    padding: 20px;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    padding: 10px 10px;
     text-align: center;
     border-top: 1px solid var(--vino-red);
-    background-color: #343434d2; /* Mantiene el color del menú */
-    transition: opacity 0.3s ease, transform 0.3s ease; /* Transición suave para mostrar/ocultar */
+    background-color: #343434; 
+    transition: opacity 0.3s ease, transform 0.3s ease; 
+    /* z-index: 1000; */
 }
 .container.collapsed .footer {
     opacity: 0; /* Oculta el footer cuando el menú está colapsado */
@@ -153,16 +189,16 @@
 
 
 .iconsalida {
-    width: 20px; /* Tamaño fijo del ícono */
+    width: 20px; 
     height: 20px;
     flex-shrink: 0; /* Evita que el ícono cambie de tamaño */
 }
 
 .logoutButton {
-    display: flex; /* Usa Flexbox para alinear el contenido */
-    align-items: center; /* Alinea verticalmente el ícono y el texto */
-    justify-content: center; /* Alinea horizontalmente el contenido */
-    gap: 10px; /* Espaciado entre el ícono y el texto */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px; 
     width: 100%;
     padding: 10px 0;
     background-color: #e74c3c;
