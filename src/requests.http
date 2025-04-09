@@ -1,0 +1,8 @@
+POST http://localhost:4000/cargo
+Content-Type: application/json
+
+{
+  "nombre": "Gerente",
+  "descripcion": "Responsable de la gestión general"
+}
+

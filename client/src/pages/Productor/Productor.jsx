@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import styles from './persona.module.css';
+import styles from './productor.module.css';
 import '../../main.css';
 import icon from '../../components/iconos/iconos';
 import SearchBar from "../../components/searchbart/SearchBar";
 
 
-function Persona() {
+function Productor() {
 
 
       // Datos iniciales
@@ -38,7 +38,7 @@ function Persona() {
         ];
 
 
-    const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar el modal
+    const [currentModal, setCurrentModal] = useState(null); // Estado para controlar cuál modal está abierto
     const [datosFiltrados, setDatosFiltrados] = useState(datosIniciales);
     const [currentPage, setCurrentPage] = useState(1); // Página actual
     const itemsPerPage = 2; // Número de elementos por página
@@ -63,21 +63,19 @@ function Persona() {
     };
 
     // modal //////////////////////////
-    const handleOpenModal = () => {
-        setIsModalOpen(true); // Abre el modal
+    const openModal = (modalName) => {
+        setCurrentModal(modalName); // Abre el modal especificado
     };
 
-    const handleCloseModal = () => {
-        setIsModalOpen(false); // Cierra el modal
+    const closeModal = () => {
+        setCurrentModal(null); // Cierra cualquier modal
     };
 
     const handleSave = () => {
-        // Aquí puedes manejar la lógica para guardar el registro
         console.log('Registro guardado');
-        setIsModalOpen(false); // Cierra el modal después de guardar
+        closeModal(); // Cierra el modal después de guardar
     };
 
-    
         // Componente para el encabezado de la tabla
         const EncabezadoTabla = () => (
             <thead>
@@ -105,6 +103,12 @@ function Persona() {
                     <td>{item.cargo}</td>
                     <td>
                     <div className='iconContainer'>
+                        <img 
+                        src={icon.ver} 
+                        alt="Eliminar" 
+                        className='iconver' 
+                        title="Ver Ficha" 
+                        />
                         <img
                         src={icon.editar}
                         alt="Editar"
@@ -145,17 +149,20 @@ function Persona() {
             </div>
             );
     return (
-        <div className={styles.personaContainer}>
+        <div className={styles.productorContainer}>
         
 
             {/* Modal /////////////////////////////////////// */}
-            {isModalOpen && (
+            {currentModal === 'empleado' && (
                 <div className='modalOverlay'>
                     <div className='modal'>
-                        <button className='closeButton' onClick={handleCloseModal}>
+                        
+                        <button className='closeButton'  onClick={closeModal}>
                             &times; {/* Ícono de cerrar */}
                         </button>
-                        <h2>Registrar Persona</h2>
+                        
+                        <h2>Registrar Empleado</h2>
+                        
                         <form className='modalForm'>
                             
                             <div className='formGroup'>
@@ -168,17 +175,17 @@ function Persona() {
                                 />
                             </div>
                             <div className='formGroup'>
-                                <label htmlFor="personaName">Nombre:</label>
+                                <label htmlFor="empleadoName">Nombre:</label>
                                 <input
                                     type="text"
-                                    id="personaName"
+                                    id="empleadoName"
                                     placeholder="Rellene el Campo"
                                     className='input'
                                 />
-                                <label htmlFor="apellidoPersona">Apellido:</label>
+                                <label htmlFor="apellidoEmpleado">Apellido:</label>
                                 <input
                                     type="text"
-                                    id="apellidoPersona"
+                                    id="apellidoEmpleado"
                                     placeholder="Rellene el Campo"
                                     className='input'
                                 />
@@ -193,9 +200,20 @@ function Persona() {
                                 />
                             </div>
                             <div className='formGroup'>
-                                <label htmlFor="CargoPersona">Cargo:</label>
+                                <label htmlFor="profesionEmpleado">Profesión:</label>
                                 <select 
-                                        id="CargoPersona"
+                                        id="profesionEmpleado"
+                                        className='select'
+                                    >
+                                        <option value="">Agronomía y veterinaria</option>
+                                        <option value="">Nutricionista</option>
+                                        <option value="">Salud</option>
+                                </select>
+                            </div>
+                            <div className='formGroup'>
+                                <label htmlFor="CargoEmpleado">Cargo:</label>
+                                <select 
+                                        id="CargoEmpleado"
                                         className='select'
                                     >
                                         <option value="">Gerente de Oficina</option>
@@ -205,7 +223,70 @@ function Persona() {
                             </div>
 
                             <button type="button" className='saveButton' onClick={handleSave}>
-                                Save
+                                Guardar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )};
+
+            {currentModal === 'usuario' && (
+                <div className='modalOverlay'>
+                    <div className='modal'>
+                        <button className='closeButton' onClick={closeModal}>
+                            &times;
+                        </button>
+                        <h2>Registrar Usuario</h2>
+                        <form className='modalForm'>
+                            {/* Aquí va el formulario del usuario */}
+                            <div className='formGroup'>
+                                <label htmlFor="Persona">Empleado</label>
+                                <select 
+                                        id="Persona"
+                                        className='select'
+                                    >
+                                        <option value="">Jose Martines</option>
+                                        <option value="">Yulisca Alvares</option>
+                                </select>
+                            </div>
+                            <div className='formGroup'>
+                                <label htmlFor="correoName">Correo:</label>
+                                <input
+                                    type="text"
+                                    id="correoName"
+                                    placeholder="Ingrese su correo @gmail.com"
+                                    className='input'
+                                />
+                            </div>
+                            <div className='formGroup'>
+                                <label htmlFor="correoClave">Coloque una Contraseña:</label>
+                                <input
+                                    type="password"
+                                    id="correoClave"
+                                    placeholder="******"
+                                    className='password'
+                                />
+                                <label htmlFor="confirClave">Confirme la Contraseña:</label>
+                                <input
+                                    type="password"
+                                    id="confirClave"
+                                    placeholder="******"
+                                    className='password'
+                                />
+                            </div>
+                            <div className='formGroup'>
+                                <label htmlFor="tipoUsuario">Tipo De Usuario</label>
+                                <select 
+                                        id="tipoUsuario"
+                                        className='select'
+                                    >
+                                        <option value="admin">Administrador</option>
+                                        <option value="moder">Moderador</option>
+                                </select>
+                            </div>
+
+                            <button type="button" className='saveButton' onClick={handleSave}>
+                                Guardar
                             </button>
                         </form>
                     </div>
@@ -218,13 +299,25 @@ function Persona() {
                 <div className='filtersContainer'>
                     <button 
                         type='button'
-                        onClick={handleOpenModal} 
+                        onClick={() => openModal('empleado')}
                         className='create'
-                        title='Registrar'
+                        title='Registrar Empleado'
                     >
-                        Registrar
+                        <img src={icon.crear} alt="Crear" className='icon' />
+                        Productor
                     </button>
-                    <h2>Personas</h2>
+                    <button 
+                        type='button'
+                        onClick={() => openModal('usuario')}
+                        className='createuser'
+                        title='Registrar Usuario'
+                    >
+                        <img src={icon.user2} alt="Crear Usuario" className='icon' />
+                        Propiedad
+                    </button>
+                
+                    <h2>Productores</h2>
+                    
                     <div className='searchContainer'>
                         <SearchBar data={datosIniciales} onSearch={setDatosFiltrados} />
                         <img src={icon.lupa} alt="Buscar" className='iconlupa' />
@@ -242,4 +335,4 @@ function Persona() {
     );
 }
 
-export default Persona;
+export default Productor;

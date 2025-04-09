@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './home.module.css';
 import '../../main.css';
 import icon from '../../components/iconos/iconos';
 import Chart from '../../components/chart/chart4';
 import SearchBar from "../../components/searchbart/SearchBar";
+import Notification from '../../components/notification/Notification';
+import { useNotification } from '../../utils/useNotification';
 
 function Home() {
-
+    
+    
         // Datos iniciales
         const datosIniciales = [
             {
@@ -44,7 +47,8 @@ function Home() {
             // Agrega más datos si es necesario
             ];  
 
-
+    const { notifications, addNotification, removeNotification } = useNotification();
+    const [notificationShown, setNotificationShown] = useState(false); // Estado para controlar la notificación
     const [chartType, setChartType] = useState('Bar'); // Estado para el tipo de gráfica
     const [chartFilter, setChartFilter] = useState('avales'); // Estado para el filtro
     const [dateRange, setDateRange] = useState({ from: '', to: '' }); // Estado para el rango de fechas
@@ -52,6 +56,15 @@ function Home() {
     const [currentPage, setCurrentPage] = useState(1); // Página actual
     const itemsPerPage = 2; // Número de elementos por página
     
+    useEffect(() => {
+        // Mostrar la notificación de bienvenida solo una vez
+        if (!notificationShown) {
+            addNotification('Bienvenido al sistema SIGENSAI', 'success');
+            setNotificationShown(true); // Marcar la notificación como mostrada
+        }
+    }, [notificationShown, addNotification]);
+
+
         // Calcular los datos para la página actual
         const indexOfLastItem = currentPage * itemsPerPage;
         const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -148,6 +161,16 @@ function Home() {
 
     return (
         <div className={styles.homeContainer}>
+
+            {/* Renderizar las notificaciones */}
+            {notifications.map((notification) => (
+                <Notification
+                    key={notification.id}
+                    message={notification.message}
+                    type={notification.type}
+                    onClose={() => removeNotification(notification.id)}
+                />
+            ))}
             {/* Cartas */}
             <div className={styles.cardsContainer}>
                 <div className={styles.card}>
@@ -156,7 +179,7 @@ function Home() {
                 </div>
                 <div className={styles.card}>
                     <span className={styles.cardNumber}>75</span>
-                    <p>Programas Completados</p>
+                    <p>Operaciones Completados</p>
                 </div>
                 <div className={styles.card}>
                     <span className={styles.cardNumber}>20</span>

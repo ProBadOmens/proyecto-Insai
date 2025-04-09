@@ -1,7 +1,7 @@
 /* Estilo general del footer */
 .footer {
     position: relative; 
-    bottom: 1em;
+    bottom: 1.4em;
     left: 0;
     width: 100%; 
     background-color: var(--white1);

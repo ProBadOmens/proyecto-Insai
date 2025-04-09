@@ -55,9 +55,30 @@ function Menu() {
     const [isCollapsed, setIsCollapsed] = useState(true); // Estado para manejar el colapso del menú
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        navigate('/'); // Redirige al login o cualquier ruta deseada
+    const handleLogout = async () => {
+        try {
+            // Realiza la solicitud al servidor para cerrar sesión
+            const response = await fetch('http://localhost:4000/auth/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('token')}`, // Envía el token si es necesario
+                },
+            });
+
+            if (response.ok) {
+                console.log('Logout exitoso');
+                // Limpia el estado del cliente
+                localStorage.removeItem('token'); // Elimina el token del almacenamiento local
+                navigate('/'); // Redirige al usuario al login
+            } else {
+                console.error('Error al cerrar sesión:', await response.text());
+            }
+        } catch (error) {
+            console.error('Error al conectar con el servidor:', error);
+        }
     };
+
 
     return (
         <div
@@ -77,44 +98,66 @@ function Menu() {
                         label="Panel Principal"
                         linkTo="/Home"
                     />
+                    
+                     {/* Medidas de Prevencion ///////////////////7 */}
                     <NavItem
-                        id="Agentes Agropecuarios"
-                        openSubmenus={openSubmenus}
-                        setOpenSubmenus={setOpenSubmenus}
-                        selectedItem={selectedItem}
-                        setSelectedItem={setSelectedItem}
-                        iconSrc={icon.cliente}
-                        label="Agentes Agropecuarios"
-                        linkTo="/*"
-                    />
+                            id="agentesAgropecuarios"
+                            openSubmenus={openSubmenus}
+                            setOpenSubmenus={setOpenSubmenus}
+                            selectedItem={selectedItem}
+                            setSelectedItem={setSelectedItem}
+                            iconSrc={icon.cliente}
+                            label="Agentes Agropecuarios"
+                        >
+                        <ul className={styles.submenu}>
+                            <li>
+                                <Link
+                                    to="/Productor"
+                                    className={`${styles.submenuItem} ${selectedItem === 'productores' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('productores')}
+                                >
+                                    Productores 
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/Animal"
+                                    className={`${styles.submenuItem} ${selectedItem === 'propiedades' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('propiedades')}
+                                >
+                                    Propiedades
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/*"
+                                    className={`${styles.submenuItem} ${selectedItem === 'cultivos' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('cultivos')}
+                                >
+                                    Cultivos
+                                </Link>
+                            </li>
+                        </ul>
+                    </NavItem>
+
+                   {/* Control Sanitarios ///////////////////7 */}
                     <NavItem
-                        id="Inspecciones"
-                        openSubmenus={openSubmenus}
-                        setOpenSubmenus={setOpenSubmenus}
-                        selectedItem={selectedItem}
-                        setSelectedItem={setSelectedItem}
-                        iconSrc={icon.escudobien}
-                        label="Inspecciones"
-                        linkTo="/*"
-                    />
-                   {/* Medidas de Prevencion ///////////////////7 */}
-                    <NavItem
-                            id="medidasprevencion"
+                            id="sanitario"
                             openSubmenus={openSubmenus}
                             setOpenSubmenus={setOpenSubmenus}
                             selectedItem={selectedItem}
                             setSelectedItem={setSelectedItem}
                             iconSrc={icon.escudomalo}
-                            label="Medidas de Prevención"
+                            label="Control Sanitario"
                         >
                         <ul className={styles.submenu}>
                             <li>
                                 <Link
                                     to="/*"
-                                    className={`${styles.submenuItem} ${selectedItem === 'programas' ? styles.selected : ''}`}
-                                    onClick={() => setSelectedItem('programas')}
+                                    className={`${styles.submenuItem} ${selectedItem === 'operacionesfitosanitarias' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('operacionesfitosanitarias')}
                                 >
-                                    Programas
+                                    Operaciones Fitosanitarias
                                 </Link>
                             </li>
                             <li>
@@ -123,89 +166,40 @@ function Menu() {
                                     className={`${styles.submenuItem} ${selectedItem === 'cuarentenafitosanitaria' ? styles.selected : ''}`}
                                     onClick={() => setSelectedItem('cuarentenafitosanitaria')}
                                 >
-                                    Cuarentena Fitosanitaria
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to="/*"
-                                    className={`${styles.submenuItem} ${selectedItem === 'cuarentenazoosanitaria' ? styles.selected : ''}`}
-                                    onClick={() => setSelectedItem('cuarentenazoosanitaria')}
-                                >
-                                    Cuarentena Zoosanitaria
+                                    Ficha Sanitaria
                                 </Link>
                             </li>
                         </ul>
                     </NavItem>
 
-                      {/* Categoriasssssssssssss */}
+                    {/* Centro  de Operaciones ////////////////////////// */}
                     <NavItem
-                        id="categoria"
-                        openSubmenus={openSubmenus}
-                        setOpenSubmenus={setOpenSubmenus}
-                        selectedItem={selectedItem}
-                        setSelectedItem={setSelectedItem}
-                        iconSrc={icon.hormiga}
-                        label="Categorías"
-                    >
-                        <ul className={styles.submenu}>
-                            <li>
-                                <Link
-                                    to="/Vegetal"
-                                    className={`${styles.submenuItem} ${selectedItem === 'vegetal' ? styles.selected : ''}`}
-                                    onClick={() => setSelectedItem('vegetal')}
-                                >
-                                    Vegetales
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to="/Animal"
-                                    className={`${styles.submenuItem} ${selectedItem === 'animal' ? styles.selected : ''}`}
-                                    onClick={() => setSelectedItem('animal')}
-                                >
-                                    Animales
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to="/*"
-                                    className={`${styles.submenuItem} ${selectedItem === 'insumos' ? styles.selected : ''}`}
-                                    onClick={() => setSelectedItem('insumos')}
-                                >
-                                    Repertorio de Insumos
-                                </Link>
-                            </li>
-                        </ul>
-                    </NavItem>
-
-                    {/* Gestion de Operaciones */}
-                    <NavItem
-                        id="Gestion de Operaciones"
+                        id="operaciones"
                         openSubmenus={openSubmenus}
                         setOpenSubmenus={setOpenSubmenus}
                         selectedItem={selectedItem}
                         setSelectedItem={setSelectedItem}
                         iconSrc={icon.altavoz}
-                        label="Gestion de Operaciones"
+                        label="Centro de Operaciones"
                     >
                         <ul className={styles.submenu}>
                             <li>
                                 <Link
                                     to="/*"
-                                    className={`${styles.submenuItem} ${selectedItem === 'controlfitosanitario' ? styles.selected : ''}`}
-                                    onClick={() => setSelectedItem('controlfitosanitario')}
+                                    className={`${styles.submenuItem} ${selectedItem === 'operaciones' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('operaciones')}
                                 >
-                                    Control Fitosanitario
+                                    Operaciones de Campo
                                 </Link>
                             </li>
                             <li>
                                 <Link
                                     to="/*"
-                                    className={`${styles.submenuItem} ${selectedItem === 'controlzoosanitario' ? styles.selected : ''}`}
-                                    onClick={() => setSelectedItem('controlzoosanitario')}
+                                    className={`${styles.submenuItem} ${selectedItem === 'medidas' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('medidas')}
                                 >
-                                    Control Zoosanitario
+                                    Medidas de Prevención    
+                                    {/* programas */}
                                 </Link>
                             </li>
                             <li>
@@ -214,30 +208,34 @@ function Menu() {
                                     className={`${styles.submenuItem} ${selectedItem === 'controlvacunacion' ? styles.selected : ''}`}
                                     onClick={() => setSelectedItem('controlvacunacion')}
                                 >
-                                    Control de Vacunación
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to="/*"
-                                    className={`${styles.submenuItem} ${selectedItem === 'epidemiologiafitosanitaria' ? styles.selected : ''}`}
-                                    onClick={() => setSelectedItem('epidemiologiafitosanitaria')}
-                                >
-                                    Epidemiología Fitosanitaria
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to="/*"
-                                    className={`${styles.submenuItem} ${selectedItem === 'epidemiologiazoosanitaria' ? styles.selected : ''}`}
-                                    onClick={() => setSelectedItem('epidemiologiazoosanitaria')}
-                                >
-                                    Epidemiología Zoosanitaria
+                                    Epidemiologías Fitosanitarias
                                 </Link>
                             </li>
                         </ul>
                     </NavItem>
-                
+                     {/* Insumos /////////////////////// */}
+                    <NavItem
+                        id="solicitud"
+                        openSubmenus={openSubmenus}
+                        setOpenSubmenus={setOpenSubmenus}
+                        selectedItem={selectedItem}
+                        setSelectedItem={setSelectedItem}
+                        iconSrc={icon.escudobien}
+                        label="Solicitudes"
+                        linkTo="/*"
+                    />
+                    {/* Insumos /////////////////////// */}
+                    <NavItem
+                        id="recursos"
+                        openSubmenus={openSubmenus}
+                        setOpenSubmenus={setOpenSubmenus}
+                        selectedItem={selectedItem}
+                        setSelectedItem={setSelectedItem}
+                        iconSrc={icon.cubo}
+                        label="Gestión de Recursos"
+                        linkTo="/*"
+                    />
+                    {/*Administradorrrrrrrrrrrrrrrrrrrrr///////////7  */}
                     <NavItem
                         id="admin"
                         openSubmenus={openSubmenus}
@@ -250,11 +248,11 @@ function Menu() {
                         <ul className={styles.submenu}>
                             <li>
                                 <Link
-                                    to="/Personas"
-                                    className={`${styles.submenuItem} ${selectedItem === 'personas' ? styles.selected : ''}`}
-                                    onClick={() => setSelectedItem('personas')}
+                                    to="/Empleados"
+                                    className={`${styles.submenuItem} ${selectedItem === 'empleados' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('empleados')}
                                 >
-                                    Personas
+                                    Empleados
                                 </Link>
                             </li>
                             <li>
@@ -268,6 +266,15 @@ function Menu() {
                             </li>
                             <li>
                                 <Link
+                                    to="/Bitacora"
+                                    className={`${styles.submenuItem} ${selectedItem === 'bitacora' ? styles.selected : ''}`}
+                                    onClick={() => setSelectedItem('bitacora')}
+                                >
+                                    Bitacora
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
                                     to="/Cargo"
                                     className={`${styles.submenuItem} ${selectedItem === 'cargo' ? styles.selected : ''}`}
                                     onClick={() => setSelectedItem('cargo')}
@@ -277,16 +284,6 @@ function Menu() {
                             </li>
                         </ul>
                     </NavItem>
-                    <NavItem
-                        id="bitacora"
-                        openSubmenus={openSubmenus}
-                        setOpenSubmenus={setOpenSubmenus}
-                        selectedItem={selectedItem}
-                        setSelectedItem={setSelectedItem}
-                        iconSrc={icon.bitacora}
-                        label="Bitacora"
-                        linkTo="/Bitacora"
-                    />
                 </ul>
                 {/* Footer con el botón de salida */}
                 <footer className={styles.footer}>

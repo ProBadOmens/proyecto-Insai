@@ -183,6 +183,7 @@ body{
   padding: 20px;
   border-radius: 10px;
   width: 400px;
+  height: auto;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   position: relative;
 }
@@ -193,15 +194,61 @@ body{
   right: 10px;
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.9rem;
   cursor: pointer;
   color: #e70d0d;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.confirmButton {
+  background: var(--vino-red);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+.confirmButton:hover {
+  background: #b10b0b;
+  transform: scale(0.98);
+}
+
+.cancelButton {
+  background: var(--lithg-green);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+.cancelButton:hover {
+  background: #539252d0;
+  transform: scale(0.98);
 }
 
 .modalForm {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
+}
+
+.formColumns {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño se pueden ajustar */
+  gap: 10px; /* Espacio entre columnas */
 }
 
 .formGroup {
@@ -209,8 +256,15 @@ body{
   flex-direction: column;
 }
 
+/* error tiempo real formulario validacion */
+.errorText {
+  color: #f44336; /* Rojo */
+  font-size: 12px;
+  margin-top: 5px;
+}
+
 .saveButton {
-  padding: 10px 15px;
+  padding: 5px 5px;
   background-color: var(--lithg-green);
   color: #ffffff;
   border: none;
@@ -235,8 +289,7 @@ body{
   font-weight: 400;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  gap: 15px; 
+  justify-content: space-around; 
   margin-bottom: 20px; 
 }
 
@@ -251,10 +304,10 @@ body{
 .search {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 0.91rem;
   color: #343434;
   background-color: var(--whit2);
-  padding: 8px 10px;
+  padding: 5px 10px;
   padding-right: 40px; 
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -285,6 +338,7 @@ body{
   opacity: 1; 
 }
 ::placeholder{
+  font-size: 14px;
   color: var(--grey3);
 }
 
@@ -311,11 +365,11 @@ body{
   justify-content: center; 
   background-color: var(--lithg-green);
   width: 100px; 
-  padding: 7px 10px; 
+  padding: 8px 0; 
   border-radius: 10px;
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: var(--white); 
   border: none; 
@@ -328,6 +382,32 @@ body{
 }
 
 .create:active {
+  transform: scale(0.95); 
+}
+/* Botón de crearusuario */
+.createuser {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background-color: var(--grey7);
+  width: 100px; 
+  padding: 8px 0; 
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--white); 
+  border: none; 
+  transition: all 0.4s ease-in-out , transform 0.4 ease-in-out;
+}
+
+.createuser:hover {
+  background-color: var(--grey4);
+  transform: scale(1);
+}
+
+.createuser:active {
   transform: scale(0.95); 
 }
 /* boton pdf general */
@@ -372,19 +452,24 @@ body{
 .table th,
 .table td {
   padding: 10px;
-  text-align: justify;
   border-bottom: 1px solid var(--grey2);
   white-space: normal; /* Evita que el texto se divida en varias líneas */
   word-wrap: break-word; /* Ajusta las palabras largas */
-  max-width: 120px; /* Establece un ancho máximo para las celdas */
+  max-width: 140px; /* Establece un ancho máximo para las celdas */
   line-height: 1;
-  /* overflow: hidden; Oculta el contenido que exceda el ancho */
-  /* text-overflow: ellipsis; Agrega puntos suspensivos al texto largo */
+  overflow: hidden; /*Oculta el contenido que exceda el ancho */
+  text-overflow: ellipsis; /*Agrega puntos suspensivos al texto largo */
 }
 
 .table th {
+  text-align: left;
   background-color: var(--lithg-green);
   color: #343434;
+}
+
+.table td {
+  text-align: justify;
+  font-size: 0.8rem;
 }
 
 .table tr:hover {
@@ -395,9 +480,8 @@ body{
 .iconContainer {
   display: flex; 
   align-items: center; 
-  justify-content: space-evenly; 
-  margin-right: 10px;
-  gap: 2px; 
+  justify-content: baseline;
+  gap: 5px; 
 }
 
 
@@ -406,8 +490,8 @@ body{
 .iconeditar,
 .iconpdf,
 .iconeliminar {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
   display: flex;
@@ -492,3 +576,8 @@ body{
   opacity: 0.8; 
 }
 
+@media (max-width: 768px) {
+  .formColumns {
+      grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+  }
+}

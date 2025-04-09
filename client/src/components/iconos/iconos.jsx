@@ -29,6 +29,8 @@ import cliente from '../../../public/cliente.svg';
 import bitacora from '../../../public/bitacora.svg';
 import escudobien from '../../../public/escudobien.svg';
 import escudomalo from '../../../public/escudomalo.svg';
+import cubo from '../../../public/cubo.svg';
+import user2 from '../../../public/user2.svg';
 
 
 const Iconos = {
@@ -63,6 +65,8 @@ const Iconos = {
     bitacora,
     escudobien,
     escudomalo,
+    cubo,
+    user2,
 };
 
 export default Iconos;

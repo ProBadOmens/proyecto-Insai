@@ -1,41 +1,100 @@
-
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-// import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './components/Layouts/MainLayout';
 import Error from './pages/Error/Error';
 import Login from './pages/Login/Login';
-import Cargo from './pages/Cargo/Cargo';
 import Home from './pages/Home/Home';
-import Personas from './pages/Persona/Persona';
+import Empleados from './pages/Empleados/Empleados';
 import Usuarios from './pages/Usuario/Usuario';
-import Animal from './pages/Animal/Animales';
+import Productor from './pages/Productor/Productor';
 import Vegetal from './pages/Vegetal/Vegetales';
 import Chart from './pages/Chart/Chart';
 import Bitacora from './pages/Bitacora/Bitacora';
-
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Ruta para Login sin Header, Menu y Footer */}
+        {/* Ruta pública: Login */}
         <Route path="/" element={<Login />} />
 
-        {/* Rutas con el layout principal */}
-        <Route path="/Home" element={<MainLayout><Home /></MainLayout>}/>
-        <Route path="/Cargo" element={<MainLayout><Cargo /></MainLayout>}/>
-        <Route path="/Personas" element={<MainLayout><Personas /></MainLayout>}/>
-        <Route path="/Usuario" element={<MainLayout><Usuarios /></MainLayout>}/>
-        <Route path="/Animal" element={<MainLayout><Animal /></MainLayout>}/>
-        <Route path="/Vegetal" element={<MainLayout><Vegetal /></MainLayout>}/>
-        <Route path="/Chart" element={<MainLayout><Chart /></MainLayout>}/>
-        <Route path="/Bitacora" element={<MainLayout><Bitacora /></MainLayout>}/>
-        <Route path="*" element={<Error />}/>
+        {/* Rutas protegidas con el layout principal */}
+        <Route
+          path="/Home"
+          element={
+            <ProtectedRoute>
+              <MainLayout>
+                <Home />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Empleados"
+          element={
+            <ProtectedRoute>
+              <MainLayout>
+                <Empleados />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Usuario"
+          element={
+            <ProtectedRoute>
+              <MainLayout>
+                <Usuarios />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Productor"
+          element={
+            <ProtectedRoute>
+              <MainLayout>
+                <Productor />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Vegetal"
+          element={
+            <ProtectedRoute>
+              <MainLayout>
+                <Vegetal />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Chart"
+          element={
+            <ProtectedRoute>
+              <MainLayout>
+                <Chart />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Bitacora"
+          element={
+            <ProtectedRoute>
+              <MainLayout>
+                <Bitacora />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Ruta para manejar errores */}
+        <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
-  
-

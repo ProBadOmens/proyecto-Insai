@@ -13,25 +13,25 @@ function Usuario() {
             id: "1",
             usuario: "runsaijose@gmail.com",
             tipo: "Administrador",
-            persona: "José Martines",
+            empleado: "José Martines",
         },
         {
             id: "2",
             usuario: "insaiyulisaca@gmail.com",
             tipo: "Moderador",
-            persona: "Yulisca Alvares",
+            empleado: "Yulisca Alvares",
         },
         {
             id: "3",
             usuario: "exampleuser@gmail.com",
             tipo: "Usuario",
-            persona: "Juan Pérez",
+            empleado: "Juan Pérez",
         },
         {
             id: "4",
             usuario: "anotheruser@gmail.com",
             tipo: "Usuario",
-            persona: "Ana López",
+            empleado: "Ana López",
         },
         // Agrega más datos si es necesario
         ];  
@@ -83,7 +83,7 @@ function Usuario() {
                 <th>ID</th>
                 <th>Usuario</th>
                 <th>Tipo</th>
-                <th>Persona</th>
+                <th>Empleado</th>
                 <th>Acción</th>
             </tr>
         </thead>
@@ -96,7 +96,7 @@ function Usuario() {
                     <td>{item.id}</td>
                     <td>{item.usuario}</td>
                     <td>{item.tipo}</td>
-                    <td>{item.persona}</td>
+                    <td>{item.empleado}</td>
                     <td>
                     <div className='iconContainer'>
                         <img
@@ -154,55 +154,6 @@ function Usuario() {
                         <h2>Registrar Usuario</h2>
                         <form className='modalForm'>
                             
-                            <div className='formGroup'>
-                                <label htmlFor="Persona">Persona</label>
-                                <select 
-                                        id="Persona"
-                                        className='select'
-                                    >
-                                        <option value="">Jose Martines</option>
-                                        <option value="">Yulisca Alvares</option>
-                                </select>
-                            </div>
-                            <div className='formGroup'>
-                                <label htmlFor="correoName">Correo:</label>
-                                <input
-                                    type="text"
-                                    id="correoName"
-                                    placeholder="Ingrese su correo @gmail.com"
-                                    className='input'
-                                />
-                            </div>
-                            <div className='formGroup'>
-                                <label htmlFor="correoClave">Coloque una Contraseña:</label>
-                                <input
-                                    type="password"
-                                    id="correoClave"
-                                    placeholder="******"
-                                    className='password'
-                                />
-                                <label htmlFor="confirClave">Confirme la Contraseña:</label>
-                                <input
-                                    type="password"
-                                    id="confirClave"
-                                    placeholder="******"
-                                    className='password'
-                                />
-                            </div>
-                            <div className='formGroup'>
-                                <label htmlFor="tipoUsuario">Tipo De Usuario</label>
-                                <select 
-                                        id="tipoUsuario"
-                                        className='select'
-                                    >
-                                        <option value="admin">Administrador</option>
-                                        <option value="moder">Moderador</option>
-                                </select>
-                            </div>
-
-                            <button type="button" className='saveButton' onClick={handleSave}>
-                                Save
-                            </button>
                         </form>
                     </div>
                 </div>
@@ -212,14 +163,6 @@ function Usuario() {
             <div className='tableSection'>
                  {/* Contenedor para filtros y acciones */}
                 <div className='filtersContainer'>
-                    <button 
-                        type='button'
-                        onClick={handleOpenModal} 
-                        className='create'
-                        title='Registrar'
-                    >
-                        Registrar
-                    </button>
                     <h2>Usuarios</h2>
                     <div className='searchContainer'>
                         <SearchBar data={datosIniciales} onSearch={setDatosFiltrados} />
